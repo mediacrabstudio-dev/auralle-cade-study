@@ -1,0 +1,291 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>AURELLE 3D Tour</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sea:#142A32; --ink:#0d1a1f; --cream:#F5EFE3; --sand:#E9DDC9; --gold:#C9A26B; --terra:#B77A55;
+  --glass:rgba(16,30,36,.48); --glass-line:rgba(245,239,227,.16); --muted:rgba(245,239,227,.66);
+  --serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --sans:'Hanken Grotesk','Helvetica Neue',Arial,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}[hidden]{display:none!important}
+html,body{height:100%}
+body{margin:0;background:var(--ink);color:var(--cream);font-family:var(--sans);font-size:14px;-webkit-font-smoothing:antialiased;overflow:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--ink)}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+/* stage */
+.stage{position:fixed;inset:0;overflow:hidden;background:var(--sea)}
+.stage .layer{position:absolute;inset:0;background:var(--sea) center/cover no-repeat;opacity:0;transition:opacity .4s ease}
+.stage .layer.on{opacity:1}
+.stage video{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s ease}
+.stage video.ready{opacity:1}
+.shade{position:absolute;inset:0;z-index:3;pointer-events:none;background:
+  linear-gradient(180deg,rgba(10,20,24,.62) 0%,rgba(10,20,24,0) 22%,rgba(10,20,24,0) 52%,rgba(10,20,24,.78) 100%),
+  linear-gradient(90deg,rgba(10,20,24,.35) 0%,rgba(10,20,24,0) 40%)}
+
+/* header */
+header{position:fixed;left:0;right:0;top:0;z-index:5;display:flex;align-items:center;gap:28px;
+  padding-top:calc(22px + env(safe-area-inset-top,0px));padding-bottom:22px;
+  padding-left:max(28px,env(safe-area-inset-left,0px));padding-right:max(28px,env(safe-area-inset-right,0px))}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--cream)}
+.logo svg{width:30px;height:auto}
+.logo b{font-family:var(--serif);font-weight:500;font-size:22px;letter-spacing:.32em}
+.logo small{display:block;font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+nav{display:flex;gap:26px;margin-left:auto}
+nav a{color:var(--muted);text-decoration:none;font-size:12px;letter-spacing:.16em;text-transform:uppercase;transition:color .2s}
+nav a:hover{color:var(--cream)}
+.cta{background:var(--cream);color:var(--sea);padding:11px 20px;border-radius:999px;font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;transition:transform .2s,background .2s}
+.cta:hover{background:#fff;transform:translateY(-1px)}
+
+/* live label */
+.live{position:fixed;z-index:4;left:max(28px,env(safe-area-inset-left,0px));top:calc(88px + env(safe-area-inset-top,0px));
+  display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:var(--glass);border:1px solid var(--glass-line);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.live{cursor:pointer;overflow:hidden;transition:background .25s,border-color .25s,transform .2s}
+.live:hover{background:rgba(16,30,36,.7);border-color:rgba(245,239,227,.34);transform:translateY(-1px)}
+.live em{font-style:normal;color:var(--muted);padding-left:10px;margin-left:2px;border-left:1px solid var(--glass-line)}
+.live[aria-pressed="true"]{background:rgba(245,239,227,.92);color:var(--sea)}
+.live[aria-pressed="true"] em{color:rgba(20,42,50,.7);border-color:rgba(20,42,50,.2)}
+.live u{position:absolute;left:0;bottom:0;height:2px;width:0;background:#ff3b30;text-decoration:none}
+.live i{width:8px;height:8px;border-radius:50%;background:#ff3b30;box-shadow:0 0 0 0 rgba(255,59,48,.7);animation:pulse 1.6s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(255,59,48,0)}100%{box-shadow:0 0 0 0 rgba(255,59,48,0)}}
+
+/* info bottom-left */
+.info{position:fixed;z-index:4;left:max(28px,env(safe-area-inset-left,0px));bottom:calc(30px + env(safe-area-inset-bottom,0px));max-width:min(620px,calc(100vw - 460px))}
+.eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+.eyebrow span{color:var(--muted);margin-left:10px}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(40px,6vw,84px);line-height:.98;margin:10px 0 10px;text-wrap:balance;text-shadow:0 2px 30px rgba(0,0,0,.35)}
+.cap{color:var(--cream);opacity:.88;font-size:15px;line-height:1.55;max-width:46ch;margin:0 0 22px}
+.facts{display:flex;gap:34px;padding-top:18px;border-top:1px solid var(--glass-line)}
+.facts div b{display:block;font-family:var(--serif);font-weight:500;font-size:26px;line-height:1}
+.facts div span{display:block;margin-top:6px;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.fade{transition:opacity .4s ease,transform .4s ease}
+.fade.out{opacity:0;transform:translateY(6px)}
+
+/* panel */
+.panel{position:fixed;z-index:5;right:max(24px,env(safe-area-inset-right,0px));top:calc(96px + env(safe-area-inset-top,0px));width:360px;
+  background:var(--glass);border:1px solid var(--glass-line);border-radius:22px;padding:18px;
+  backdrop-filter:blur(22px) saturate(1.2);-webkit-backdrop-filter:blur(22px) saturate(1.2);box-shadow:0 20px 60px rgba(0,0,0,.28)}
+.panel h2{margin:2px 4px 14px;font-family:var(--serif);font-weight:500;font-size:24px}
+.panel h2 small{display:block;font-family:var(--sans);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;padding:4px;background:rgba(0,0,0,.22);border-radius:999px;margin-bottom:12px}
+.tabs button{padding:9px 0;border-radius:999px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);transition:background .25s,color .25s}
+.tabs button.on{background:var(--cream);color:var(--sea);font-weight:600}
+.rows{display:flex;flex-direction:column;gap:6px}
+.row{display:flex;align-items:center;gap:12px;padding:7px;border-radius:14px;text-align:left;transition:background .2s,color .2s;width:100%}
+.row:hover{background:rgba(245,239,227,.1)}
+.row img{width:74px;height:46px;object-fit:cover;border-radius:9px;flex:none;background:var(--sea)}
+.row b{display:block;font-weight:500;font-size:14px}
+.row span{display:block;font-size:12px;color:var(--muted);margin-top:2px;line-height:1.35}
+.row.on{background:var(--cream);color:var(--sea)}
+.row.on span{color:rgba(20,42,50,.7)}
+.hint{margin:12px 4px 0;font-size:11px;color:var(--muted);display:flex;gap:6px;align-items:center}
+kbd{font-family:var(--sans);font-size:10px;border:1px solid var(--glass-line);border-radius:5px;padding:1px 6px}
+.note{position:fixed;z-index:4;right:max(24px,env(safe-area-inset-right,0px));bottom:calc(30px + env(safe-area-inset-bottom,0px));font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:20;display:grid;place-items:center;background:rgba(8,16,19,.62);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:16px}
+.sheet{width:min(440px,100%);background:var(--cream);color:var(--sea);border-radius:22px;padding:30px}
+.sheet h3{font-family:var(--serif);font-weight:500;font-size:34px;margin:0 0 6px}
+.sheet p{margin:0 0 18px;color:rgba(20,42,50,.72);line-height:1.5}
+.sheet label{display:block;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;margin:14px 0 6px;color:rgba(20,42,50,.7)}
+.sheet input,.sheet select{width:100%;padding:12px 14px;border:1px solid rgba(20,42,50,.2);border-radius:12px;background:#fff;font:inherit;color:var(--sea)}
+.sheet .row2{display:flex;gap:10px;margin-top:22px}
+.sheet .go{flex:1;background:var(--sea);color:var(--cream);padding:13px;border-radius:999px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-size:12px}
+.sheet .x{padding:13px 18px;border-radius:999px;border:1px solid rgba(20,42,50,.2);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+
+/* phone */
+@media (max-width:860px){
+  body{overflow:auto}
+  nav{display:none}
+  header{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-top:calc(14px + env(safe-area-inset-top,0px));padding-bottom:14px}
+  .logo b{font-size:18px}.logo small{display:none}
+  .cta{padding:9px 14px;font-size:10.5px}
+  .stage{position:relative;height:62vh;min-height:360px}
+  header{position:absolute}
+  .live{position:absolute;top:calc(66px + env(safe-area-inset-top,0px));left:max(16px,env(safe-area-inset-left,0px))}
+  .info{position:absolute;top:calc(62vh - 210px);bottom:auto;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));max-width:none}
+  h1{font-size:40px}
+  .cap{display:none}
+  .facts{gap:22px}.facts div b{font-size:20px}
+  .panel{position:relative;top:auto;right:auto;width:auto;margin:16px max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px));background:#16262c}
+  .hint{display:none}
+  .note{position:static;display:block;padding:18px max(16px,env(safe-area-inset-left,0px)) 28px}
+}
+@media (prefers-reduced-motion:reduce){.stage .layer,.stage video,.fade{transition:none}.live i{animation:none}}
+
+.walkbtn{display:flex;align-items:center;gap:12px;width:100%;margin-top:10px;padding:12px 14px;border-radius:14px;border:1px solid rgba(201,162,107,.5);background:linear-gradient(120deg,rgba(201,162,107,.22),rgba(201,162,107,.06));color:var(--cream);text-align:left;cursor:pointer;transition:background .25s,transform .2s}
+.walkbtn:hover{background:rgba(201,162,107,.32);transform:translateY(-1px)}
+.walkbtn svg{width:26px;height:26px;flex:none;color:var(--gold)}
+.walkbtn b{display:block;font-weight:500;font-size:14px}.walkbtn span{display:block;font-size:12px;color:var(--muted)}
+.walk{position:fixed;inset:0;z-index:20;background:#0d1113}
+.walk iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.walkbar{position:absolute;z-index:2;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom,0px));display:flex;gap:8px}
+.walkbar button,.walkbar a{font:500 13px var(--sans);color:var(--cream);background:rgba(16,30,36,.72);border:1px solid var(--glass-line);border-radius:999px;padding:10px 16px;text-decoration:none;cursor:pointer;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.walkbar button{background:var(--cream);color:var(--sea);border-color:var(--cream)}
+</style>
+
+<div class="stage" id="stage">
+  <div class="layer" id="ph"></div>
+  <video id="vA" muted playsinline loop preload="auto"></video>
+  <video id="vB" muted playsinline loop preload="auto"></video>
+  <div class="shade"></div>
+</div>
+
+<header>
+  <a class="logo" href="#" aria-label="AURELLE">
+    <svg viewBox="0 0 48 42" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 31V19a14 14 0 0 1 28 0v12"/><path d="M3 36h42"/></svg>
+    <div><b>AURELLE</b><small>Coastal residence · Alibaug</small></div>
+  </a>
+  <nav><a href="#" data-k="gate">Residence</a><a href="#" data-k="pool">Amenities</a><a href="#" data-k="aerial">Location</a><a href="#" data-k="living">Interiors</a><a href="#walk" id="navWalk">3D walkthrough</a></nav>
+  <button class="cta" id="book">Book a private tour</button>
+</header>
+
+<button class="live" id="live" aria-pressed="false" title="Play the whole tour"><i></i><span>Live 3D tour</span><em id="liveState">Play tour</em><u id="liveBar"></u></button>
+
+<section class="info fade" id="info" aria-live="polite">
+  <div class="eyebrow" id="eb">Outside<span>View 01 / 05</span></div>
+  <h1 id="title">Above the grove</h1>
+  <p class="cap" id="cap"></p>
+  <div class="facts" id="facts"></div>
+</section>
+
+<aside class="panel" aria-label="Choose your view">
+  <h2><small>Explore</small>Choose your view</h2>
+  <div class="tabs" role="tablist">
+    <button class="on" data-tab="out" role="tab">Outside</button>
+    <button data-tab="in" role="tab">Inside</button>
+  </div>
+  <div class="rows" id="rows"></div>
+  <button type="button" class="walkbtn" id="walkOpen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg><div><b>Walk through in 3D</b><span>Move freely through the real model</span></div></button>
+  <div class="hint"><kbd>←</kbd><kbd>→</kbd> to move between views</div>
+</aside>
+
+<div class="note">Concept project by Crab Studio · Visuals are AI-generated</div>
+
+<div class="walk" id="walk" hidden>
+  <iframe id="walkFrame" title="AURELLE 3D walkthrough" allow="fullscreen; xr-spatial-tracking" allowfullscreen></iframe>
+</div>
+
+<div class="modal" id="modal" hidden>
+  <form class="sheet" id="form">
+    <h3>A private tour</h3>
+    <p>Walk the villa with us, in person in Alibaug or on a call from anywhere.</p>
+    <label for="n">Name</label><input id="n" required autocomplete="name">
+    <label for="w">How to reach you</label><input id="w" required placeholder="Phone or email">
+    <label for="t">When</label><select id="t"><option>Weekday morning</option><option>Weekend</option><option>Golden hour visit</option><option>Video call</option></select>
+    <div class="row2"><button type="button" class="x" id="close">Close</button><button class="go" type="submit">Request tour</button></div>
+  </form>
+</div>
+
+<script>
+const V={
+ out:[
+  {k:'aerial',t:'Above the grove',seq:['aerial','aer2','aer3','aer4'],c:'Drone in over the coconut grove: the house, the pool and the fire pit, with the beach a few steps beyond.',f:[['One','Private villa'],['Sea','Facing the Arabian Sea'],['Grove','Coconut and mango trees']]},
+  {k:'evening',t:'The waterfront',c:'From the beach after dark: the fire lit, every window glowing, the sea at your back.',f:[['Beach','Steps from the lawn'],['Fire','Sunken fire-pit lounge'],['Mumbai','Lights on the horizon']]},
+  {k:'terrace',t:'Sun terrace',c:'The upper terrace under the teak pergola, with nothing between you and the water.',f:[['Upper','Terrace level'],['Teak','Pergola overhead'],['West','Sunset facing']]},
+  {k:'pool',t:'Across the pool',c:'The house at sunset, seen across the water from the sea side.',f:[['Pool','Infinity edge'],['Stone','Travertine deck'],['Golden','Evening light']]},
+  {k:'gate',t:'Arrival',c:'Teak slats in a white lime wall, then a quiet court. The first thing you touch.',f:[['Gate','Teak and lime'],['Court','Paved arrival'],['Shade','Planted entrance']]}],
+ in:[
+  {k:'living',t:'Living room',c:'Glass walls that slide away, so the room opens straight onto the garden and the sea.',f:[['Glass','Full-height walls'],['Sea','View from the sofa'],['Rattan','Hand-woven pendants']]},
+  {k:'bedroom',t:'Master bedroom',c:'Wake to linen curtains moving in the sea breeze and the palms outside.',f:[['Sea','Facing balcony'],['Linen','Sheer curtains'],['Oak','Warm floors']]},
+  {k:'kitchen',t:'Kitchen',c:'A long travertine island under woven pendants, open to the garden.',f:[['Island','Honed travertine'],['Teak','Cabinetry'],['Open','To the garden']]},
+  {k:'bath',t:'Spa bath',c:'A stone tub at the window, with the palms and the sea beyond.',f:[['Stone','Freestanding tub'],['View','Palms and sea'],['Twin','Teak vanity']]},
+  {k:'courtyard',t:'Courtyard',c:'An open-air courtyard at the heart of the house, under a flowering frangipani.',f:[['Open','To the sky'],['Tree','Frangipani'],['Centre','Of the house']]}]
+};
+const all=[...V.out.map((v,i)=>({...v,g:'out',i})),...V.in.map((v,i)=>({...v,g:'in',i}))];
+const $=id=>document.getElementById(id);
+const ph=$('ph'),rows=$('rows'),info=$('info');
+const vids=[$('vA'),$('vB')];let front=0;
+let tab='out',cur=-1,tok=0;
+
+function renderRows(){
+  rows.innerHTML='';
+  V[tab].forEach(v=>{
+    const b=document.createElement('button');b.type='button';b.className='row';b.dataset.k=v.k;
+    b.innerHTML=`<img src="p/${v.k}.jpg" alt=""><div><b>${v.t}</b><span>${v.c.split(/[.:]/)[0]}</span></div>`;
+    b.addEventListener('click',()=>{stopTour();go(all.findIndex(a=>a.k===v.k))});
+    rows.appendChild(b);
+  });
+  mark();
+}
+function mark(){rows.querySelectorAll('.row').forEach(r=>r.classList.toggle('on',cur>=0&&r.dataset.k===all[cur].k))}
+function setTab(t){tab=t;document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));renderRows()}
+
+// one clip into the back buffer, faded over the front one. With `after`, the next clip starts
+// just before this one ends, so a view can run as a reel instead of a single repeating loop.
+function showClip(src,my,after){
+  const old=vids[front],nx=vids[1-front];
+  nx.classList.remove('ready');
+  nx.oncanplay=null;nx.onerror=null;nx.ontimeupdate=null;nx.onended=null;
+  nx.loop=!after;nx.src=src;nx.currentTime=0;
+  const show=()=>{if(my!==tok)return;nx.style.zIndex=2;old.style.zIndex=1;nx.classList.add('ready');front=1-front;setTimeout(()=>{if(my===tok&&old!==nx){old.classList.remove('ready');old.pause()}},450)};
+  nx.oncanplay=()=>{const p=nx.play();if(p&&p.then)p.then(show).catch(()=>{});else show()};
+  if(after){
+    nx.ontimeupdate=()=>{if(my!==tok)return;const d=nx.duration;if(d&&d-nx.currentTime<0.6){nx.ontimeupdate=null;after()}};
+    nx.onended=()=>{if(my===tok&&nx.ontimeupdate){nx.ontimeupdate=null;after()}};
+  }
+  nx.onerror=()=>{}; // still image stays
+  nx.load();
+}
+function go(n){
+  n=(n+all.length)%all.length;if(n===cur)return;
+  const v=all[n];cur=n;const my=++tok;
+  if(v.g!==tab)setTab(v.g);else mark();
+  // text crossfade
+  info.classList.add('out');
+  setTimeout(()=>{
+    if(my!==tok)return;
+    $('eb').innerHTML=`${v.g==='out'?'Outside':'Inside'}<span>View ${String(v.i+1).padStart(2,'0')} / 05</span>`;
+    $('title').textContent=v.t;$('cap').textContent=v.c;
+    $('facts').innerHTML=v.f.map(([a,b])=>`<div><b>${a}</b><span>${b}</span></div>`).join('');
+    info.classList.remove('out');
+  },200);
+  // picture crossfade: still first, then the video in the back buffer fades over it
+  ph.style.backgroundImage=`url(p/${v.k}.jpg)`;ph.classList.add('on');
+  if(v.seq){let i=0;const step=()=>{if(my!==tok)return;showClip(`loop/${v.seq[i%v.seq.length]}.mp4`,my,()=>{i++;step()})};step()}
+  else showClip(`loop/${v.k}.mp4`,my);
+  try{history.replaceState(null,'','#'+v.k)}catch(e){}
+  if(touring)armTour();
+}
+
+/* live tour: plays every view in order */
+let touring=false,tourT=null,barT=null;const STEP=8000;
+function armTour(){clearTimeout(tourT);const bar=$('liveBar');bar.style.transition='none';bar.style.width='0';void bar.offsetWidth;bar.style.transition=`width ${STEP}ms linear`;bar.style.width='100%';tourT=setTimeout(()=>go(cur+1),STEP)}
+function startTour(){touring=true;$('live').setAttribute('aria-pressed','true');$('liveState').textContent='Pause';armTour()}
+function stopTour(){if(!touring)return;touring=false;clearTimeout(tourT);$('live').setAttribute('aria-pressed','false');$('liveState').textContent='Play tour';const bar=$('liveBar');bar.style.transition='none';bar.style.width='0'}
+$('live').addEventListener('click',()=>touring?stopTour():startTour());
+
+document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>{stopTour();setTab(b.dataset.tab);go(all.findIndex(a=>a.g===b.dataset.tab))}));
+document.querySelectorAll('nav a[data-k]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();stopTour();go(all.findIndex(v=>v.k===a.dataset.k))}));
+addEventListener('keydown',e=>{if(!$('modal').hidden||!$('walk').hidden)return;
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();stopTour();go(cur+1)}
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();stopTour();go(cur-1)}
+  if(e.key===' '&&e.target===document.body){e.preventDefault();touring?stopTour():startTour()}});
+$('book').addEventListener('click',()=>{stopTour();$('modal').hidden=false;$('n').focus()});
+$('close').addEventListener('click',()=>{$('modal').hidden=true});
+$('modal').addEventListener('click',e=>{if(e.target.id==='modal')$('modal').hidden=true});
+$('form').addEventListener('submit',e=>{e.preventDefault();$('form').innerHTML='<h3>Thank you.</h3><p>This is a concept page, so nothing was sent. On the live site, your request would reach the AURELLE sales team.</p><div class="row2"><button type="button" class="go" id="back">Back to the tour</button></div>';$('back').addEventListener('click',()=>{$('modal').hidden=true})});
+/* 3D walkthrough: the real model, in a full-screen layer */
+function openWalk(){stopTour();const f=$('walkFrame');if(!f.src)f.src='walk/index.html';$('walk').hidden=false;vids.forEach(v=>v.pause());try{history.replaceState(null,'','#walk')}catch(e){}setTimeout(()=>{try{f.focus()}catch(e){}},50)}
+function closeWalk(){$('walk').hidden=true;const v=vids[front];if(v&&v.src)v.play().catch(()=>{});try{history.replaceState(null,'','#'+all[cur].k)}catch(e){}}
+$('walkOpen').addEventListener('click',openWalk);
+$('navWalk').addEventListener('click',e=>{e.preventDefault();openWalk()});
+addEventListener('message',e=>{if(e.data==='aurelle:close'&&!$('walk').hidden)closeWalk()});
+addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('walk').hidden)closeWalk()});
+addEventListener('hashchange',()=>{if(location.hash==='#walk'){openWalk();return}const i=all.findIndex(v=>'#'+v.k===location.hash);if(i>=0&&i!==cur)go(i)});
+
+renderRows();
+const wantWalk=location.hash==='#walk';
+const start=all.findIndex(v=>'#'+v.k===location.hash);
+go(start>=0?start:0);
+if(wantWalk)openWalk();
+
+</script>
+
+</body></html>

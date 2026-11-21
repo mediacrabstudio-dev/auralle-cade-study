@@ -185,6 +185,33 @@ footer{background:var(--tide);color:var(--ivory);padding:clamp(60px,8vw,120px) v
 .fbig{font-size:clamp(34px,4vw,64px);letter-spacing:-.045em;line-height:1;margin:0}
 .fbot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:clamp(60px,8vw,120px);padding-top:22px;border-top:1px solid rgba(247,243,236,.18);font-size:13px;color:#aeb9b8}
 
+
+/* walkthrough */
+.walk{background:var(--tide);color:var(--ivory);padding-bottom:clamp(80px,10vw,160px)}
+.walk .chap .no{color:#aeb9b8}.walk .chap .desc{color:#b8c0b9}
+.wframe{position:relative;margin:0 var(--pad);aspect-ratio:16/9;overflow:hidden;border-radius:6px;background:#0e1f25}
+.wframe .in{position:absolute;inset:-8% 0;height:116%}
+.wframe video{position:absolute;inset:0}
+.wframe .ov{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;gap:18px;padding:clamp(20px,3vw,48px);background:linear-gradient(180deg,rgba(10,22,27,0) 45%,rgba(10,22,27,.7))}
+.keys{display:flex;gap:8px;flex-wrap:wrap}
+.keys span{height:32px;padding:0 12px;border-radius:8px;border:1px solid rgba(247,243,236,.35);display:inline-flex;align-items:center;font-size:12px;letter-spacing:.06em;background:rgba(247,243,236,.06);backdrop-filter:blur(6px)}
+.wstrip{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,1.4vw,20px);padding:clamp(10px,1.4vw,20px) var(--pad) 0}
+.wstrip figure{margin:0}.wstrip .v{aspect-ratio:16/10;overflow:hidden;border-radius:4px;background:#0e1f25}
+.wstrip figcaption{font-size:13px;color:#aeb9b8;padding-top:10px}
+.walk .feat{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--pad);padding:clamp(40px,5vw,80px) var(--pad) 0;border-top:1px solid rgba(247,243,236,.14);margin:clamp(40px,5vw,80px) var(--pad) 0;padding-left:0;padding-right:0}
+.walk .feat h3{margin:0 0 8px;font-weight:400;font-size:22px;letter-spacing:-.02em}.walk .feat p{margin:0;font-size:15px;line-height:1.55;color:#b8c0b9}
+.cta.light{background:var(--ivory);color:var(--tide)}.cta.light::before{background:var(--copper)}.cta.light:hover{color:#fff}
+/* website */
+.site{padding-bottom:clamp(80px,10vw,160px)}
+.browser{margin:0 auto;width:min(1100px,calc(100% - var(--pad)*2));border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 60px 120px -50px rgba(20,42,50,.45),0 0 0 1px rgba(20,42,50,.08)}
+.bbar{height:42px;display:flex;align-items:center;gap:8px;padding:0 16px;background:#f3f0ea;border-bottom:1px solid rgba(20,42,50,.08)}
+.bbar i{width:11px;height:11px;border-radius:50%;background:#d9d2c6;display:block}
+.bbar span{margin:0 auto;font-size:12px;color:var(--ink2);background:#fff;border-radius:6px;padding:5px 14px}
+.bview{height:min(78vh,760px);overflow:hidden;position:relative}
+.bview img{height:auto;object-fit:initial;will-change:transform}
+.site .row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:clamp(28px,3vw,48px)}
+@media (max-width:860px){.wstrip,.walk .feat{grid-template-columns:1fr 1fr}.wframe{aspect-ratio:4/5}.bview{height:70vh}}
+
 /* cursor */
 .cur{position:fixed;left:0;top:0;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:#fff;mix-blend-mode:difference;pointer-events:none;z-index:90;transition:width .4s var(--ease),height .4s var(--ease),margin .4s var(--ease);display:flex;align-items:center;justify-content:center}
 .cur span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#000;opacity:0;transition:opacity .3s}
@@ -237,6 +264,8 @@ footer{background:var(--tide);color:var(--ivory);padding:clamp(60px,8vw,120px) v
     <li><a href="#work">Work</a></li>
     <li><a href="#film">Film</a></li>
     <li><a href="#identity">Identity</a></li>
+    <li><a href="#walkthrough">3D Tour</a></li>
+    <li><a href="#website">Website</a></li>
     <li><a href="#social">Campaign</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -368,9 +397,53 @@ footer{background:var(--tide);color:var(--ivory);padding:clamp(60px,8vw,120px) v
   <figure class="pm pm--bleed"><div class="frame" data-reveal><div class="in"><img src="media/07_e07_beach_back.jpg" alt="Aurelle, the villa from the beach at dusk" loading="lazy"></div></div><figcaption><span>From the beach, blue hour</span><span>22</span></figcaption></figure>
 </section>
 
+
+<section class="walk" id="walkthrough">
+  <div class="chap">
+    <div class="no lbl"><span>(05)</span><span>3D walkthrough</span></div>
+    <h2 class="split">Walk the villa <span class="it">yourself.</span></h2>
+    <p class="desc">The whole estate, built to size and lit with baked light, running live in the browser. Walk it with the keyboard, take the guided tour, or watch it go from morning to night. No app, no download.</p>
+  </div>
+  <div class="wframe" data-reveal>
+    <div class="in"><video src="tour/loop/living.mp4" poster="tour/p/living.jpg" muted loop playsinline autoplay preload="none"></video></div>
+    <div class="ov">
+      <div class="keys" aria-hidden="true"><span>W</span><span>A</span><span>S</span><span>D</span><span>Walk</span><span>Fly</span><span>Plan</span><span>Guided tour</span></div>
+      <a class="cta light" href="tour/">Enter the 3D tour <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+  <div class="wstrip">
+    <figure><div class="v"><video src="tour/loop/gate.mp4" poster="tour/p/gate.jpg" muted loop playsinline autoplay preload="none"></video></div><figcaption>Arrival</figcaption></figure>
+    <figure><div class="v"><video src="tour/loop/courtyard.mp4" poster="tour/p/courtyard.jpg" muted loop playsinline autoplay preload="none"></video></div><figcaption>Courtyard</figcaption></figure>
+    <figure><div class="v"><video src="tour/loop/pool.mp4" poster="tour/p/pool.jpg" muted loop playsinline autoplay preload="none"></video></div><figcaption>Pool</figcaption></figure>
+    <figure><div class="v"><video src="tour/loop/evening.mp4" poster="tour/p/evening.jpg" muted loop playsinline autoplay preload="none"></video></div><figcaption>Evening</figcaption></figure>
+  </div>
+  <div class="feat">
+    <div><h3>Free walk</h3><p>First-person, with solid walls and floors. Fly mode lifts you above the roof.</p></div>
+    <div><h3>Guided tour</h3><p>Sit back while it glides room to room, from the gate to the shoreline.</p></div>
+    <div><h3>Plan view</h3><p>Click any spot on the site plan to go straight there.</p></div>
+    <div><h3>Baked light</h3><p>Light rendered in Blender and baked into the model, so it looks lit, not flat.</p></div>
+  </div>
+</section>
+
+<section class="site" id="website">
+  <div class="chap">
+    <div class="no lbl"><span>(06)</span><span>Website</span></div>
+    <h2 class="split">A site that sells <span class="it">the quiet.</span></h2>
+    <p class="desc">The buyer-facing brand site: one day at Aurelle hour by hour, the materials, the location with Mumbai on the horizon, a viewing request and a way straight into the 3D tour.</p>
+  </div>
+  <div class="browser">
+    <div class="bbar"><i></i><i></i><i></i><span>aurelle · coastal residences</span></div>
+    <div class="bview" id="bview"><img src="media/website_full.jpg" alt="The full Aurelle brand website, from hero to contact" loading="lazy" id="bimg"></div>
+  </div>
+  <div class="row">
+    <a class="cta" href="website/">Visit the website <span aria-hidden="true">→</span></a>
+    <a class="cta ghost" href="tour/">Open the 3D tour</a>
+  </div>
+</section>
+
 <section class="social" id="social">
   <div class="chap">
-    <div class="no lbl"><span>(05)</span><span>Campaign</span></div>
+    <div class="no lbl"><span>(07)</span><span>Campaign</span></div>
     <h2 class="split">The quiet <span class="it">hours.</span></h2>
     <p class="desc">One day at Aurelle, told hour by hour. A launch grid, carousels, square motion posts and a 23-second reel.</p>
   </div>
@@ -401,7 +474,7 @@ footer{background:var(--tide);color:var(--ivory);padding:clamp(60px,8vw,120px) v
 
 <section>
   <div class="chap" style="padding-top:0">
-    <div class="no lbl"><span>(06)</span><span>Process</span></div>
+    <div class="no lbl"><span>(08)</span><span>Process</span></div>
     <h2 class="split">From site plan <span class="it">to screen.</span></h2>
   </div>
   <div class="proc">
@@ -589,7 +662,7 @@ footer{background:var(--tide);color:var(--ivory);padding:clamp(60px,8vw,120px) v
 
   /* play small videos only in view */
   var io = new IntersectionObserver(function(es){ es.forEach(function(e){ var vid=e.target; if(vid===v) return; if(e.isIntersecting){ vid.preload='auto'; vid.play().catch(function(){}); } else vid.pause(); }); }, { rootMargin:'200px' });
-  document.querySelectorAll('.social video').forEach(function(x){ io.observe(x); });
+  document.querySelectorAll('.social video, .walk video').forEach(function(x){ io.observe(x); });
 
   /* marquee driven by time + scroll velocity */
   var mt = document.querySelector('.mtrack');
@@ -612,6 +685,12 @@ footer{background:var(--tide);color:var(--ivory);padding:clamp(60px,8vw,120px) v
     document.querySelectorAll('.fl').forEach(function(el,i){ var k = (i%2?1:-1)*(14+i*6); gsap.to(el, { x:cx*k, rotateZ:cx*4*(i%2?1:-1), duration:1.2, ease:'expo.out', overwrite:'auto' }); });
   });
 
+
+  /* website screenshot scrolls inside the browser frame */
+  var bimg=document.getElementById('bimg'), bview=document.getElementById('bview');
+  if(bimg){ var setB=function(){ gsap.to(bimg,{ y:function(){ return -(bimg.offsetHeight - bview.offsetHeight); }, ease:'none', scrollTrigger:{ trigger:'.browser', start:'top 75%', end:'bottom 10%', scrub:1, invalidateOnRefresh:true } }); };
+    if(bimg.complete) setB(); else bimg.addEventListener('load', function(){ setB(); ScrollTrigger.refresh(); }); }
+
   /* next parallax */
   gsap.fromTo('.next .in', { yPercent:-10 }, { yPercent:10, ease:'none', scrollTrigger:{ trigger:'.next', start:'top bottom', end:'bottom top', scrub:true } });
 
@@ -620,7 +699,7 @@ footer{background:var(--tide);color:var(--ivory);padding:clamp(60px,8vw,120px) v
   if(window.matchMedia('(hover:hover)').matches){
     var xTo = gsap.quickTo(cur, 'x', { duration:0.5, ease:'power3' }), yTo = gsap.quickTo(cur, 'y', { duration:0.5, ease:'power3' });
     window.addEventListener('mousemove', function(e){ xTo(e.clientX); yTo(e.clientY); });
-    document.querySelectorAll('[data-reveal], .hcard .frame, .post, .phone').forEach(function(el){
+    document.querySelectorAll('[data-reveal], .hcard .frame, .post, .phone, .wstrip .v, .browser').forEach(function(el){
       el.addEventListener('mouseenter', function(){ cur.classList.add('big'); });
       el.addEventListener('mouseleave', function(){ cur.classList.remove('big'); });
     });
