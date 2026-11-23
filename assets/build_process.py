@@ -96,7 +96,7 @@ PAGES = [
     ]),
   dict(slug="film", n="05", name="Film", title='Film',
     lead="A 58-second brand film, from the sea to the lit house at night. Camera moves come from the 3D model, so the film keeps the real architecture.",
-    hero=vid("media/film.mp4", "media/film_poster.jpg", mobile="media/film-m.mp4"),
+    hero=vid("media/film-v2.mp4", "media/film_poster-v2.jpg", mobile="media/film-m-v2.mp4"),
     body=[
       sec("Structure", "One continuous journey.", lst(
         ("Sea to land", "A slow approach across the bay towards the estate."),
