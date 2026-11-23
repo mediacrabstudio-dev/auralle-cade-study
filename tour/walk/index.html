@@ -56,7 +56,7 @@
 <body>
 <canvas id="c"></canvas>
 <div class="top">
-  <div style="display:flex;gap:14px;align-items:center;pointer-events:auto"><button class="btn" id="bBack" style="background:#F5EFE3;color:#142A32;border-color:#F5EFE3">← Back to tour</button><div class="brand">AURELLE<small>Coastal Villa · 3D Walkthrough</small></div></div>
+  <div style="display:flex;gap:14px;align-items:center;pointer-events:auto"><button class="btn" id="bBack" style="background:#F5EFE3;color:#142A32;border-color:#F5EFE3">← Back</button><div class="brand">AURELLE<small>Coastal Villa · 3D Walkthrough</small></div></div>
   <div class="tools">
     <button class="btn" id="bTour">▶ Guided tour</button>
     <button class="btn on" id="bMode">Walk</button>
@@ -507,7 +507,7 @@ function tourStep() {
 function startTour() { touring = true; $('bTour').classList.add('on'); $('bTour').textContent = '❚❚ Pause tour'; $('tourbar').classList.add('on'); $('cover').style.display = 'none'; tourStep(); }
 function stopTour() { if (!touring) return; touring = false; drift = null; $('bTour').classList.remove('on'); $('bTour').textContent = '▶ Guided tour'; $('tourbar').classList.remove('on'); }
 $('bTour').onclick = () => touring ? stopTour() : startTour();
-$('bBack').onclick = () => { stopTour(); if (window.parent !== window) window.parent.postMessage('aurelle:close', '*'); else location.href = '../index.html#living'; };
+$('bBack').onclick = () => { stopTour(); if (window.parent !== window) window.parent.postMessage('aurelle:close', '*'); else if (document.referrer && new URL(document.referrer).origin === location.origin && history.length > 1) history.back(); else location.href = '/'; };
 
 // ---- blueprint minimap: a section cut through the real model, per floor
 const MAP = { x0: -14, z0: -44, w: 64, h: 64, size: 512, floors: [], cur: 0, manual: null };
