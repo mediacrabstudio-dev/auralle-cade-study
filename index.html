@@ -33,7 +33,8 @@ a{color:inherit;text-decoration:none}
 .loader svg{width:64px}
 
 /* nav */
-.nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:22px var(--pad);color:#fff;mix-blend-mode:difference;transition:transform .7s var(--ease)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:22px var(--pad);color:#fff;transition:transform .7s var(--ease),background .5s,color .5s;text-shadow:0 1px 12px rgba(10,22,27,.25)}
+.nav.solid{background:rgba(239,235,228,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:var(--ink);text-shadow:none}
 .nav.hide{transform:translateY(-120%)}
 .logo{font-weight:500;font-size:17px;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
 .logo i{width:9px;height:9px;border-radius:50%;background:currentColor;display:inline-block}
@@ -76,7 +77,7 @@ a{color:inherit;text-decoration:none}
 
 /* gallery frames */
 .media{display:flex;flex-direction:column;gap:clamp(40px,6vw,120px);padding-bottom:clamp(40px,6vw,120px)}
-.pm{position:relative}
+.pm{position:relative;margin:0}
 .pm figure{margin:0}
 .frame{position:relative;overflow:hidden;aspect-ratio:var(--ar,16/9);background:#d9d2c6;will-change:clip-path}
 .frame .in{position:absolute;inset:-8% 0;height:116%}
@@ -212,6 +213,17 @@ footer{background:var(--tide);color:var(--ivory);padding:clamp(60px,8vw,120px) v
 .site .row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:clamp(28px,3vw,48px)}
 @media (max-width:860px){.wstrip,.walk .feat{grid-template-columns:1fr 1fr}.wframe{aspect-ratio:4/5}.bview{height:70vh}}
 
+
+/* mobile menu */
+.navbtn{display:none;align-items:center;height:40px;padding:0 16px;border-radius:999px;border:1px solid currentColor;background:transparent;color:inherit;font:500 13px/1 "Inter Tight",sans-serif;letter-spacing:.04em;cursor:pointer}
+.mmenu{position:fixed;inset:0;z-index:70;background:var(--tide);color:var(--ivory);display:flex;flex-direction:column;justify-content:space-between;padding:22px var(--pad) calc(28px + env(safe-area-inset-bottom));transform:translateY(-100%);transition:transform .7s var(--ease);visibility:hidden}
+.mmenu.open{transform:none;visibility:visible}
+.mmenu .top{display:flex;justify-content:space-between;align-items:center}
+.mmenu ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.mmenu ul a{font-size:clamp(40px,12vw,64px);letter-spacing:-.05em;line-height:1.05}
+.mmenu .bot{display:flex;flex-direction:column;gap:14px;font-size:14px;color:#aeb9b8}
+.swipe{display:none;align-items:center;gap:10px;padding:0 var(--pad) 16px;color:#aeb9b8;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+
 /* cursor */
 .cur{position:fixed;left:0;top:0;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:#fff;mix-blend-mode:difference;pointer-events:none;z-index:90;transition:width .4s var(--ease),height .4s var(--ease),margin .4s var(--ease);display:flex;align-items:center;justify-content:center}
 .cur span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#000;opacity:0;transition:opacity .3s}
@@ -239,6 +251,17 @@ footer{background:var(--tide);color:var(--ivory);padding:clamp(60px,8vw,120px) v
   .hcard{width:84vw}
   .hpin{height:auto;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:60px;scroll-snap-type:x mandatory}.hcard{scroll-snap-align:start}
   .film{height:auto}.film .stick{position:relative;height:auto;aspect-ratio:16/9}
+  .film .stick{aspect-ratio:4/5}
+  .film h2{font-size:clamp(44px,13vw,72px)}
+  .film .bar{flex-direction:column;align-items:flex-start}
+  .keys{display:none}
+  .hero .tag{top:84px}
+  .intro{padding-top:72px}
+  .chap{padding-top:88px}
+  .hcard p{font-size:12px}
+  .swipe{display:flex}
+  .navbtn{display:inline-flex}
+
 }
 @media (prefers-reduced-motion:reduce){
   .loader{display:none}
@@ -269,10 +292,24 @@ footer{background:var(--tide);color:var(--ivory);padding:clamp(60px,8vw,120px) v
     <li><a href="#social">Campaign</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <button class="navbtn" id="navbtn" type="button" aria-expanded="false" aria-controls="mmenu">Menu</button>
 </nav>
+<div class="mmenu" id="mmenu" aria-hidden="true">
+  <div class="top"><span class="logo"><i></i>Crab Studio</span><button class="navbtn" id="navclose" type="button" style="display:inline-flex">Close</button></div>
+  <ul>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#film">Film</a></li>
+    <li><a href="#walkthrough">3D Tour</a></li>
+    <li><a href="#website">Website</a></li>
+    <li><a href="#identity">Identity</a></li>
+    <li><a href="#social">Campaign</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="bot"><span>Aurelle — a Crab Studio case study</span><a href="mailto:media.crabstudio@gmail.com">media.crabstudio@gmail.com</a></div>
+</div>
 
 <header class="hero" id="top">
-  <div class="bgimg"><img src="media/05_e05_hero.jpg" alt="Aurelle, the villa across the pool at golden hour" fetchpriority="high"></div>
+  <div class="bgimg"><img src="media/05_e05_hero.jpg" srcset="media/05_e05_hero-m.jpg 1100w, media/05_e05_hero.jpg 2200w" sizes="100vw" alt="Aurelle, the villa across the pool at golden hour" fetchpriority="high"></div>
   <div class="tag"><span class="pill">Real estate</span><span class="pill">Concept · 2026</span></div>
   <div class="txt">
     <h1 aria-label="Aurelle"><span>A</span><span>u</span><span>r</span><span>e</span><span>l</span><span>l</span><span>e</span></h1>
@@ -298,22 +335,22 @@ footer{background:var(--tide);color:var(--ivory);padding:clamp(60px,8vw,120px) v
 </section>
 
 <section class="media">
-  <figure class="pm pm--bleed"><div class="frame" data-reveal><div class="in"><img src="media/01_e01_aerial.jpg" alt="Aurelle, the estate from above between forest and shore" loading="lazy"></div></div><figcaption><span>Aurelle, the estate from above</span><span>01</span></figcaption></figure>
-  <figure class="pm pm--right"><div class="frame" data-reveal><div class="in"><img src="media/03_e03_gate.jpg" alt="Aurelle, the timber gate" loading="lazy"></div></div><figcaption><span>The timber gate</span><span>02</span></figcaption></figure>
-  <figure class="pm pm--inset"><div class="frame" data-reveal><div class="in"><img src="media/04_e04_arrival.jpg" alt="Aurelle, arrival terrace" loading="lazy"></div></div><figcaption><span>Arrival, in hard morning sun</span><span>03</span></figcaption></figure>
-  <figure class="pm pm--left"><div class="frame" data-reveal><div class="in"><img src="media/18_c05_gate_detail.jpg" alt="Aurelle, gate detail" loading="lazy"></div></div><figcaption><span>Teak and lime plaster</span><span>04</span></figcaption></figure>
-  <figure class="pm pm--bleed"><div class="frame" data-reveal><div class="in"><img src="media/06_e06_lawn_sea.jpg" alt="Aurelle, the lawn running to the sea" loading="lazy"></div></div><figcaption><span>The lawn runs to the sea. Mumbai on the horizon</span><span>05</span></figcaption></figure>
+  <figure class="pm pm--bleed"><div class="frame" data-reveal><div class="in"><img src="media/01_e01_aerial.jpg" srcset="media/01_e01_aerial-m.jpg 1100w, media/01_e01_aerial.jpg 2200w" sizes="100vw" alt="Aurelle, the estate from above between forest and shore" loading="lazy"></div></div><figcaption><span>Aurelle, the estate from above</span><span>01</span></figcaption></figure>
+  <figure class="pm pm--right"><div class="frame" data-reveal><div class="in"><img src="media/03_e03_gate.jpg" srcset="media/03_e03_gate-m.jpg 1100w, media/03_e03_gate.jpg 2200w" sizes="100vw" alt="Aurelle, the timber gate" loading="lazy"></div></div><figcaption><span>The timber gate</span><span>02</span></figcaption></figure>
+  <figure class="pm pm--inset"><div class="frame" data-reveal><div class="in"><img src="media/04_e04_arrival.jpg" srcset="media/04_e04_arrival-m.jpg 1100w, media/04_e04_arrival.jpg 2200w" sizes="100vw" alt="Aurelle, arrival terrace" loading="lazy"></div></div><figcaption><span>Arrival, in hard morning sun</span><span>03</span></figcaption></figure>
+  <figure class="pm pm--left"><div class="frame" data-reveal><div class="in"><img src="media/18_c05_gate_detail.jpg" srcset="media/18_c05_gate_detail-m.jpg 1100w, media/18_c05_gate_detail.jpg 2200w" sizes="100vw" alt="Aurelle, gate detail" loading="lazy"></div></div><figcaption><span>Teak and lime plaster</span><span>04</span></figcaption></figure>
+  <figure class="pm pm--bleed"><div class="frame" data-reveal><div class="in"><img src="media/06_e06_lawn_sea.jpg" srcset="media/06_e06_lawn_sea-m.jpg 1100w, media/06_e06_lawn_sea.jpg 2200w" sizes="100vw" alt="Aurelle, the lawn running to the sea" loading="lazy"></div></div><figcaption><span>The lawn runs to the sea. Mumbai on the horizon</span><span>05</span></figcaption></figure>
   <div class="duo">
-    <figure class="pm"><div class="frame" data-reveal style="--ar:4/5"><div class="in"><img src="media/15_c02_pool_edge.jpg" alt="Aurelle, pool edge" loading="lazy"></div></div><figcaption><span>Pool edge</span><span>06</span></figcaption></figure>
-    <figure class="pm"><div class="frame" data-reveal style="--ar:4/5"><div class="in"><img src="media/16_c03_lounger.jpg" alt="Aurelle, loungers in hard shadow" loading="lazy"></div></div><figcaption><span>Midday</span><span>07</span></figcaption></figure>
+    <figure class="pm"><div class="frame" data-reveal style="--ar:4/5"><div class="in"><img src="media/15_c02_pool_edge.jpg" srcset="media/15_c02_pool_edge-m.jpg 1100w, media/15_c02_pool_edge.jpg 2200w" sizes="100vw" alt="Aurelle, pool edge" loading="lazy"></div></div><figcaption><span>Pool edge</span><span>06</span></figcaption></figure>
+    <figure class="pm"><div class="frame" data-reveal style="--ar:4/5"><div class="in"><img src="media/16_c03_lounger.jpg" srcset="media/16_c03_lounger-m.jpg 1100w, media/16_c03_lounger.jpg 2200w" sizes="100vw" alt="Aurelle, loungers in hard shadow" loading="lazy"></div></div><figcaption><span>Midday</span><span>07</span></figcaption></figure>
   </div>
-  <figure class="pm pm--inset"><div class="frame" data-reveal><div class="in"><img src="media/13_e11_side.jpg" alt="Aurelle, the villa in misty light" loading="lazy"></div></div><figcaption><span>The side terrace, after rain</span><span>08</span></figcaption></figure>
+  <figure class="pm pm--inset"><div class="frame" data-reveal><div class="in"><img src="media/13_e11_side.jpg" srcset="media/13_e11_side-m.jpg 1100w, media/13_e11_side.jpg 2200w" sizes="100vw" alt="Aurelle, the villa in misty light" loading="lazy"></div></div><figcaption><span>The side terrace, after rain</span><span>08</span></figcaption></figure>
 </section>
 
 <section class="film" id="film">
   <div class="stick">
     <div class="vwrap">
-      <video id="filmv" src="media/film.mp4" poster="media/film_poster.jpg" muted loop playsinline preload="metadata"></video>
+      <video id="filmv" src="media/film.mp4" data-mobile="media/film-m.mp4" poster="media/film_poster.jpg" muted loop playsinline preload="metadata"></video>
       <div class="ov">
         <span class="lbl">(Brand film)</span>
         <div class="bar">
@@ -335,16 +372,16 @@ footer{background:var(--tide);color:var(--ivory);padding:clamp(60px,8vw,120px) v
 </section>
 
 <section class="media">
-  <figure class="pm pm--bleed"><div class="frame" data-reveal><div class="in"><img src="media/09_i01_living.jpg" alt="Aurelle, living room" loading="lazy"></div></div><figcaption><span>Living room, open to the sea</span><span>09</span></figcaption></figure>
-  <figure class="pm pm--right"><div class="frame" data-reveal><div class="in"><img src="media/12_i04_courtyard.jpg" alt="Aurelle, courtyard" loading="lazy"></div></div><figcaption><span>The frangipani courtyard</span><span>10</span></figcaption></figure>
-  <figure class="pm pm--left"><div class="frame" data-reveal><div class="in"><img src="media/19_c06_canopy.jpg" alt="Aurelle, light through the canopy" loading="lazy"></div></div><figcaption><span>Light through the canopy</span><span>11</span></figcaption></figure>
-  <figure class="pm pm--inset"><div class="frame" data-reveal><div class="in"><img src="media/11_i03_veranda.jpg" alt="Aurelle, veranda" loading="lazy"></div></div><figcaption><span>The veranda</span><span>12</span></figcaption></figure>
+  <figure class="pm pm--bleed"><div class="frame" data-reveal><div class="in"><img src="media/09_i01_living.jpg" srcset="media/09_i01_living-m.jpg 1100w, media/09_i01_living.jpg 2200w" sizes="100vw" alt="Aurelle, living room" loading="lazy"></div></div><figcaption><span>Living room, open to the sea</span><span>09</span></figcaption></figure>
+  <figure class="pm pm--right"><div class="frame" data-reveal><div class="in"><img src="media/12_i04_courtyard.jpg" srcset="media/12_i04_courtyard-m.jpg 1100w, media/12_i04_courtyard.jpg 2200w" sizes="100vw" alt="Aurelle, courtyard" loading="lazy"></div></div><figcaption><span>The frangipani courtyard</span><span>10</span></figcaption></figure>
+  <figure class="pm pm--left"><div class="frame" data-reveal><div class="in"><img src="media/19_c06_canopy.jpg" srcset="media/19_c06_canopy-m.jpg 1100w, media/19_c06_canopy.jpg 2200w" sizes="100vw" alt="Aurelle, light through the canopy" loading="lazy"></div></div><figcaption><span>Light through the canopy</span><span>11</span></figcaption></figure>
+  <figure class="pm pm--inset"><div class="frame" data-reveal><div class="in"><img src="media/11_i03_veranda.jpg" srcset="media/11_i03_veranda-m.jpg 1100w, media/11_i03_veranda.jpg 2200w" sizes="100vw" alt="Aurelle, veranda" loading="lazy"></div></div><figcaption><span>The veranda</span><span>12</span></figcaption></figure>
   <div class="duo">
-    <figure class="pm"><div class="frame" data-reveal style="--ar:4/5"><div class="in"><img src="media/10_i02_bedroom.jpg" alt="Aurelle, master bedroom" loading="lazy"></div></div><figcaption><span>Master bedroom</span><span>13</span></figcaption></figure>
-    <figure class="pm"><div class="frame" data-reveal style="--ar:4/5"><div class="in"><img src="media/10_spa_bath.jpg" alt="Aurelle, stone bath" loading="lazy"></div></div><figcaption><span>Stone bath</span><span>14</span></figcaption></figure>
+    <figure class="pm"><div class="frame" data-reveal style="--ar:4/5"><div class="in"><img src="media/10_i02_bedroom.jpg" srcset="media/10_i02_bedroom-m.jpg 1100w, media/10_i02_bedroom.jpg 2200w" sizes="100vw" alt="Aurelle, master bedroom" loading="lazy"></div></div><figcaption><span>Master bedroom</span><span>13</span></figcaption></figure>
+    <figure class="pm"><div class="frame" data-reveal style="--ar:4/5"><div class="in"><img src="media/10_spa_bath.jpg" srcset="media/10_spa_bath-m.jpg 1100w, media/10_spa_bath.jpg 2200w" sizes="100vw" alt="Aurelle, stone bath" loading="lazy"></div></div><figcaption><span>Stone bath</span><span>14</span></figcaption></figure>
   </div>
-  <figure class="pm pm--bleed"><div class="frame" data-reveal><div class="in"><img src="media/22_c09_dining.jpg" alt="Aurelle, dining under the pergola" loading="lazy"></div></div><figcaption><span>Dining under the pergola</span><span>15</span></figcaption></figure>
-  <figure class="pm pm--right"><div class="frame" data-reveal><div class="in"><img src="media/09_kitchen.jpg" alt="Aurelle, kitchen" loading="lazy"></div></div><figcaption><span>Kitchen</span><span>16</span></figcaption></figure>
+  <figure class="pm pm--bleed"><div class="frame" data-reveal><div class="in"><img src="media/22_c09_dining.jpg" srcset="media/22_c09_dining-m.jpg 1100w, media/22_c09_dining.jpg 2200w" sizes="100vw" alt="Aurelle, dining under the pergola" loading="lazy"></div></div><figcaption><span>Dining under the pergola</span><span>15</span></figcaption></figure>
+  <figure class="pm pm--right"><div class="frame" data-reveal><div class="in"><img src="media/09_kitchen.jpg" srcset="media/09_kitchen-m.jpg 1100w, media/09_kitchen.jpg 2200w" sizes="100vw" alt="Aurelle, kitchen" loading="lazy"></div></div><figcaption><span>Kitchen</span><span>16</span></figcaption></figure>
 </section>
 
 <section class="state">
@@ -366,16 +403,17 @@ footer{background:var(--tide);color:var(--ivory);padding:clamp(60px,8vw,120px) v
       </div>
     </div>
   </div>
+  <div class="swipe" aria-hidden="true">Swipe <span>→</span></div>
   <div class="hpin">
     <div class="htrack">
       <div class="hcard logo-card"><div class="frame"><svg viewBox="0 0 96 72" aria-hidden="true"><path d="M22 60V34A26 26 0 0 1 74 34V60" fill="none" stroke="#142a32" stroke-width="2"/><line x1="2" y1="60" x2="94" y2="60" stroke="#142a32" stroke-width="2"/></svg><div class="wm">AURELLE</div></div><p><span>The mark</span><span>01</span></p></div>
-      <div class="hcard"><div class="frame"><img src="media/mock_wall.jpg" alt="Aurelle logo on a lime plaster wall" loading="lazy"></div><p><span>Logo on lime plaster</span><span>02</span></p></div>
-      <div class="hcard"><div class="frame"><img src="media/mock_cards.jpg" alt="Aurelle business cards" loading="lazy"></div><p><span>Cards</span><span>03</span></p></div>
-      <div class="hcard"><div class="frame"><img src="media/mock_stationery.jpg" alt="Aurelle stationery" loading="lazy"></div><p><span>Stationery</span><span>04</span></p></div>
-      <div class="hcard"><div class="frame"><img src="media/mock_gate.jpg" alt="Aurelle gate signage" loading="lazy"></div><p><span>Gate signage</span><span>05</span></p></div>
-      <div class="hcard"><div class="frame"><img src="media/mock_box.jpg" alt="Aurelle welcome box" loading="lazy"></div><p><span>Welcome box</span><span>06</span></p></div>
-      <div class="hcard"><div class="frame"><img src="media/mock_book.jpg" alt="Aurelle brochure" loading="lazy"></div><p><span>The brochure</span><span>07</span></p></div>
-      <div class="hcard"><div class="frame"><img src="media/mock_phone.jpg" alt="Aurelle Instagram on a phone" loading="lazy"></div><p><span>Instagram</span><span>08</span></p></div>
+      <div class="hcard"><div class="frame"><img src="media/mock_wall.jpg" srcset="media/mock_wall-m.jpg 1100w, media/mock_wall.jpg 2200w" sizes="100vw" alt="Aurelle logo on a lime plaster wall" loading="lazy"></div><p><span>Logo on lime plaster</span><span>02</span></p></div>
+      <div class="hcard"><div class="frame"><img src="media/mock_cards.jpg" srcset="media/mock_cards-m.jpg 1100w, media/mock_cards.jpg 2200w" sizes="100vw" alt="Aurelle business cards" loading="lazy"></div><p><span>Cards</span><span>03</span></p></div>
+      <div class="hcard"><div class="frame"><img src="media/mock_stationery.jpg" srcset="media/mock_stationery-m.jpg 1100w, media/mock_stationery.jpg 2200w" sizes="100vw" alt="Aurelle stationery" loading="lazy"></div><p><span>Stationery</span><span>04</span></p></div>
+      <div class="hcard"><div class="frame"><img src="media/mock_gate.jpg" srcset="media/mock_gate-m.jpg 1100w, media/mock_gate.jpg 2200w" sizes="100vw" alt="Aurelle gate signage" loading="lazy"></div><p><span>Gate signage</span><span>05</span></p></div>
+      <div class="hcard"><div class="frame"><img src="media/mock_box.jpg" srcset="media/mock_box-m.jpg 1100w, media/mock_box.jpg 2200w" sizes="100vw" alt="Aurelle welcome box" loading="lazy"></div><p><span>Welcome box</span><span>06</span></p></div>
+      <div class="hcard"><div class="frame"><img src="media/mock_book.jpg" srcset="media/mock_book-m.jpg 1100w, media/mock_book.jpg 2200w" sizes="100vw" alt="Aurelle brochure" loading="lazy"></div><p><span>The brochure</span><span>07</span></p></div>
+      <div class="hcard"><div class="frame"><img src="media/mock_phone.jpg" srcset="media/mock_phone-m.jpg 1100w, media/mock_phone.jpg 2200w" sizes="100vw" alt="Aurelle Instagram on a phone" loading="lazy"></div><p><span>Instagram</span><span>08</span></p></div>
     </div>
   </div>
 </section>
@@ -387,14 +425,14 @@ footer{background:var(--tide);color:var(--ivory);padding:clamp(60px,8vw,120px) v
 </section>
 
 <section class="media">
-  <figure class="pm pm--bleed"><div class="frame" data-reveal><div class="in"><img src="media/03_a9iii_family_lawn.jpg" alt="Aurelle, family playing on the lawn by the sea" loading="lazy"></div></div><figcaption><span>The lawn, with the city across the water</span><span>17</span></figcaption></figure>
-  <figure class="pm pm--right"><div class="frame" data-reveal><div class="in"><img src="media/05_sun_terrace_couple.jpg" alt="Aurelle, couple on the sun terrace" loading="lazy"></div></div><figcaption><span>The upper terrace</span><span>18</span></figcaption></figure>
-  <figure class="pm pm--inset"><div class="frame" data-reveal><div class="in"><img src="media/07_monsoon_dinner.jpg" alt="Aurelle, monsoon dinner" loading="lazy"></div></div><figcaption><span>Monsoon dinner</span><span>19</span></figcaption></figure>
+  <figure class="pm pm--bleed"><div class="frame" data-reveal><div class="in"><img src="media/03_a9iii_family_lawn.jpg" srcset="media/03_a9iii_family_lawn-m.jpg 1100w, media/03_a9iii_family_lawn.jpg 2200w" sizes="100vw" alt="Aurelle, family playing on the lawn by the sea" loading="lazy"></div></div><figcaption><span>The lawn, with the city across the water</span><span>17</span></figcaption></figure>
+  <figure class="pm pm--right"><div class="frame" data-reveal><div class="in"><img src="media/05_sun_terrace_couple.jpg" srcset="media/05_sun_terrace_couple-m.jpg 1100w, media/05_sun_terrace_couple.jpg 2200w" sizes="100vw" alt="Aurelle, couple on the sun terrace" loading="lazy"></div></div><figcaption><span>The upper terrace</span><span>18</span></figcaption></figure>
+  <figure class="pm pm--inset"><div class="frame" data-reveal><div class="in"><img src="media/07_monsoon_dinner.jpg" srcset="media/07_monsoon_dinner-m.jpg 1100w, media/07_monsoon_dinner.jpg 2200w" sizes="100vw" alt="Aurelle, monsoon dinner" loading="lazy"></div></div><figcaption><span>Monsoon dinner</span><span>19</span></figcaption></figure>
   <div class="duo">
-    <figure class="pm"><div class="frame" data-reveal style="--ar:4/5"><div class="in"><img src="media/06_sunrise_mist.jpg" alt="Aurelle, sunrise mist" loading="lazy"></div></div><figcaption><span>Sunrise</span><span>20</span></figcaption></figure>
-    <figure class="pm"><div class="frame" data-reveal style="--ar:4/5"><div class="in"><img src="media/17_c04_firepit.jpg" alt="Aurelle, fire pit" loading="lazy"></div></div><figcaption><span>Fire pit</span><span>21</span></figcaption></figure>
+    <figure class="pm"><div class="frame" data-reveal style="--ar:4/5"><div class="in"><img src="media/06_sunrise_mist.jpg" srcset="media/06_sunrise_mist-m.jpg 1100w, media/06_sunrise_mist.jpg 2200w" sizes="100vw" alt="Aurelle, sunrise mist" loading="lazy"></div></div><figcaption><span>Sunrise</span><span>20</span></figcaption></figure>
+    <figure class="pm"><div class="frame" data-reveal style="--ar:4/5"><div class="in"><img src="media/17_c04_firepit.jpg" srcset="media/17_c04_firepit-m.jpg 1100w, media/17_c04_firepit.jpg 2200w" sizes="100vw" alt="Aurelle, fire pit" loading="lazy"></div></div><figcaption><span>Fire pit</span><span>21</span></figcaption></figure>
   </div>
-  <figure class="pm pm--bleed"><div class="frame" data-reveal><div class="in"><img src="media/07_e07_beach_back.jpg" alt="Aurelle, the villa from the beach at dusk" loading="lazy"></div></div><figcaption><span>From the beach, blue hour</span><span>22</span></figcaption></figure>
+  <figure class="pm pm--bleed"><div class="frame" data-reveal><div class="in"><img src="media/07_e07_beach_back.jpg" srcset="media/07_e07_beach_back-m.jpg 1100w, media/07_e07_beach_back.jpg 2200w" sizes="100vw" alt="Aurelle, the villa from the beach at dusk" loading="lazy"></div></div><figcaption><span>From the beach, blue hour</span><span>22</span></figcaption></figure>
 </section>
 
 
@@ -491,10 +529,10 @@ footer{background:var(--tide);color:var(--ivory);padding:clamp(60px,8vw,120px) v
 </section>
 
 <section class="wend" id="contact">
-  <div class="fl fl--1" data-float="-30"><img src="media/14_c01_pergola.jpg" alt="" loading="lazy"></div>
+  <div class="fl fl--1" data-float="-30"><img src="media/14_c01_pergola.jpg" srcset="media/14_c01_pergola-m.jpg 1100w, media/14_c01_pergola.jpg 2200w" sizes="100vw" alt="" loading="lazy"></div>
   <div class="fl fl--2" data-float="40"><img src="media/s126_post_5_4x5.jpg" alt="" loading="lazy"></div>
-  <div class="fl fl--3" data-float="-50"><img src="media/21_c08_bedroom_seat.jpg" alt="" loading="lazy"></div>
-  <div class="fl fl--4" data-float="25"><img src="media/08_e10_sun_terrace.jpg" alt="" loading="lazy"></div>
+  <div class="fl fl--3" data-float="-50"><img src="media/21_c08_bedroom_seat.jpg" srcset="media/21_c08_bedroom_seat-m.jpg 1100w, media/21_c08_bedroom_seat.jpg 2200w" sizes="100vw" alt="" loading="lazy"></div>
+  <div class="fl fl--4" data-float="25"><img src="media/08_e10_sun_terrace.jpg" srcset="media/08_e10_sun_terrace-m.jpg 1100w, media/08_e10_sun_terrace.jpg 2200w" sizes="100vw" alt="" loading="lazy"></div>
   <h2 class="split">Your project could be <span class="it">next.</span></h2>
   <div class="btns">
     <a class="cta" href="mailto:media.crabstudio@gmail.com">Start a project <span aria-hidden="true">→</span></a>
@@ -504,7 +542,7 @@ footer{background:var(--tide);color:var(--ivory);padding:clamp(60px,8vw,120px) v
 </section>
 
 <a class="next" href="#top" aria-label="Back to the top of Aurelle">
-  <div class="in"><img src="media/02_z6iii_luminous_dusk.jpg" alt="" loading="lazy"></div>
+  <div class="in"><img src="media/02_z6iii_luminous_dusk.jpg" srcset="media/02_z6iii_luminous_dusk-m.jpg 1100w, media/02_z6iii_luminous_dusk.jpg 2200w" sizes="100vw" alt="" loading="lazy"></div>
   <div class="t">
     <div>
       <span class="lbl" style="display:block;margin-bottom:18px">(Back to the start)</span>
@@ -531,6 +569,7 @@ footer{background:var(--tide);color:var(--ivory);padding:clamp(60px,8vw,120px) v
 <script>
 (function(){
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(window.matchMedia('(max-width: 860px)').matches){ var fv=document.getElementById('filmv'); if(fv && fv.dataset.mobile) fv.src=fv.dataset.mobile; }
   var hasGsap = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
   var loader = document.querySelector('.loader');
   if(!hasGsap){ if(loader) loader.remove(); return; }
@@ -545,13 +584,20 @@ footer{background:var(--tide);color:var(--ivory);padding:clamp(60px,8vw,120px) v
     gsap.ticker.lagSmoothing(0);
     lenis.stop();
   }
-  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  document.querySelectorAll('a[href^="#"]:not(#mmenu a)').forEach(function(a){
     a.addEventListener('click', function(e){
       var id = a.getAttribute('href'); var el = id.length>1 ? document.querySelector(id) : null;
       if(!el) return; e.preventDefault();
-      if(lenis) lenis.scrollTo(el, {duration:1.6}); else el.scrollIntoView({behavior:'smooth'});
+      if(lenis) lenis.scrollTo(el, {duration:1.6, force:true}); else el.scrollIntoView({behavior:'smooth'});
     });
   });
+
+
+  /* mobile menu */
+  var menuEl=document.getElementById('mmenu'), nb=document.getElementById('navbtn'), nc=document.getElementById('navclose');
+  function setMenu(o){ menuEl.classList.toggle('open',o); menuEl.setAttribute('aria-hidden',!o); nb.setAttribute('aria-expanded',o); if(lenis){ o?lenis.stop():lenis.start(); } document.body.style.overflow=o?'hidden':''; }
+  nb.addEventListener('click',function(){ setMenu(true); }); nc.addEventListener('click',function(){ setMenu(false); });
+  menuEl.querySelectorAll('a[href^="#"]').forEach(function(a){ a.addEventListener('click',function(e){ var t=document.querySelector(a.getAttribute('href')); e.preventDefault(); setMenu(false); requestAnimationFrame(function(){ if(!t) return; if(lenis) lenis.scrollTo(t,{duration:1.4}); else t.scrollIntoView({behavior:'smooth'}); }); }); });
 
   /* ---------- split text into lines ---------- */
   function splitLines(el){
@@ -596,6 +642,7 @@ footer{background:var(--tide);color:var(--ivory);padding:clamp(60px,8vw,120px) v
   gsap.to('.hero .bgimg', { yPercent:18, ease:'none', scrollTrigger:{ trigger:'.hero', start:'top top', end:'bottom top', scrub:true } });
   gsap.to('.hero .txt', { yPercent:-40, opacity:0, ease:'none', scrollTrigger:{ trigger:'.hero', start:'30% top', end:'bottom top', scrub:true } });
 
+  ScrollTrigger.create({ trigger:'.hero', start:'bottom 70px', onEnter:function(){ nav.classList.add('solid'); }, onLeaveBack:function(){ nav.classList.remove('solid'); } });
   /* progress + nav hide */
   gsap.to('.progress', { scaleX:1, ease:'none', scrollTrigger:{ start:0, end:'max', scrub:0.3 } });
   var nav = document.querySelector('.nav'), lastY = 0;
@@ -625,8 +672,9 @@ footer{background:var(--tide);color:var(--ivory);padding:clamp(60px,8vw,120px) v
   document.querySelectorAll('[data-reveal]').forEach(function(f){
     var inner = f.querySelector('.in');
     var tl = gsap.timeline({ scrollTrigger:{ trigger:f, start:'top 95%', end:'top 35%', scrub:1 } });
-    tl.fromTo(f, { clipPath:'inset(14% 10% 14% 10%)' }, { clipPath:'inset(0% 0% 0% 0%)', ease:'none' }, 0)
-      .fromTo(inner.firstElementChild, { scale:1.3 }, { scale:1, ease:'none' }, 0);
+    var small = window.innerWidth < 861;
+    tl.fromTo(f, { clipPath: small ? 'inset(6% 4% 6% 4%)' : 'inset(14% 10% 14% 10%)' }, { clipPath:'inset(0% 0% 0% 0%)', ease:'none' }, 0)
+      .fromTo(inner.firstElementChild, { scale: small ? 1.12 : 1.3 }, { scale:1, ease:'none' }, 0);
     gsap.fromTo(inner, { yPercent:-6 }, { yPercent:6, ease:'none', scrollTrigger:{ trigger:f, start:'top bottom', end:'bottom top', scrub:true } });
   });
 
