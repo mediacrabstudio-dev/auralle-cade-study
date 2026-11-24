@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aurelle — Crab Studio</title>
+<meta name="description" content="Aurelle: a coastal villa brand by Crab Studio. Strategy, identity, 3D estate, photoreal imagery, brand film and launch campaign.">
+<link rel="icon" href="../../assets/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#efebe4; --ink:#142a32; --ink2:#4a5a5f; --tide:#142a32; --ivory:#f7f3ec; --sand:#e4d9c6; --copper:#b77a55; --copperText:#8a5634;
+  --pad:clamp(16px,2.4vw,40px); --ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Inter Tight",system-ui,-apple-system,sans-serif;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--tide);color:var(--ivory)}
+.it{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-weight:300;letter-spacing:-.01em}
+.lbl{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:500}
+.wrap{padding:0 var(--pad)}
+
+/* loader */
+.loader{position:fixed;inset:0;z-index:100;background:var(--tide);color:var(--ivory);display:flex;align-items:flex-end;justify-content:space-between;padding:var(--pad)}
+.loader .n{font-size:clamp(64px,14vw,220px);line-height:.8;letter-spacing:-.06em;font-weight:300;font-variant-numeric:tabular-nums}
+.loader .mk{display:flex;flex-direction:column;align-items:flex-end;gap:14px}
+.loader svg{width:64px}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:22px var(--pad);color:#fff;mix-blend-mode:difference;transition:transform .7s var(--ease)}
+.nav.hide{transform:translateY(-120%)}
+.logo{font-weight:500;font-size:17px;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
+.logo i{width:9px;height:9px;border-radius:50%;background:currentColor;display:inline-block}
+.nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0;font-size:14px}
+.nav ul a{position:relative}
+.nav ul a::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .5s var(--ease)}
+.nav ul a:hover::after{transform:scaleX(1);transform-origin:left}
+.cta{display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 22px;border-radius:999px;background:var(--copper);color:#fff;font-size:14px;font-weight:500;position:relative;overflow:hidden;isolation:isolate}
+.cta::before{content:"";position:absolute;inset:0;background:var(--tide);transform:translateY(101%);transition:transform .6s var(--ease);z-index:-1;border-radius:inherit}
+.cta:hover::before{transform:none}
+.cta.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px currentColor}
+.cta.ghost::before{background:var(--ink)}
+.cta.ghost:hover{color:var(--ivory)}
+.navcta{mix-blend-mode:normal}
+.progress{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--copper);transform-origin:0 0;transform:scaleX(0);z-index:60}
+
+/* hero */
+.hero{position:relative;height:100vh;height:100svh;min-height:600px;overflow:hidden;background:var(--tide);color:#fff}
+.hero .bgimg{position:absolute;inset:-6% 0 0 0;height:112%;will-change:transform}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,22,27,.35) 0%,rgba(10,22,27,0) 28%,rgba(10,22,27,0) 50%,rgba(10,22,27,.55) 100%);pointer-events:none}
+.hero .txt{position:absolute;left:var(--pad);right:var(--pad);bottom:clamp(16px,3vw,40px);z-index:2;display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.hero h1{margin:0;font-weight:400;font-size:clamp(84px,19.5vw,360px);line-height:.82;letter-spacing:-.065em;display:flex;overflow:hidden;padding-bottom:.04em}
+.hero h1 span{display:inline-block;will-change:transform}
+.hero .side{display:flex;flex-direction:column;gap:10px;align-items:flex-end;text-align:right;padding-bottom:1.4vw;font-size:14px}
+.hero .tag{position:absolute;left:var(--pad);top:96px;z-index:2;display:flex;gap:10px}
+.pill{height:30px;padding:0 14px;border-radius:999px;border:1px solid rgba(255,255,255,.55);display:inline-flex;align-items:center;font-size:12px;letter-spacing:.06em;backdrop-filter:blur(6px);background:rgba(255,255,255,.06)}
+.scrollhint{display:flex;align-items:center;gap:10px}
+.scrollhint b{width:1px;height:34px;background:rgba(255,255,255,.4);position:relative;overflow:hidden;display:block}
+.scrollhint b::after{content:"";position:absolute;left:0;top:-100%;width:1px;height:100%;background:#fff;animation:drip 2.2s var(--ease) infinite}
+@keyframes drip{to{top:100%}}
+
+/* intro */
+.intro{padding:clamp(80px,12vw,200px) var(--pad) clamp(64px,8vw,140px);display:grid;grid-template-columns:1fr 3fr;gap:var(--pad)}
+.intro p.big{margin:0;font-size:clamp(28px,3.6vw,64px);line-height:1.06;letter-spacing:-.035em;font-weight:400}
+.meta{grid-column:2;display:grid;grid-template-columns:repeat(4,1fr);gap:var(--pad);margin-top:clamp(48px,6vw,96px);border-top:1px solid rgba(20,42,50,.18);padding-top:22px}
+.meta dt{color:var(--ink2);margin-bottom:10px}
+.meta dd{margin:0;font-size:15px;line-height:1.5}
+.line{display:block;overflow:hidden}
+.line>span{display:block;will-change:transform}
+
+/* gallery frames */
+.media{display:flex;flex-direction:column;gap:clamp(40px,6vw,120px);padding-bottom:clamp(40px,6vw,120px)}
+.pm{position:relative}
+.pm figure{margin:0}
+.frame{position:relative;overflow:hidden;aspect-ratio:var(--ar,16/9);background:#d9d2c6;will-change:clip-path}
+.frame .in{position:absolute;inset:-8% 0;height:116%}
+.frame .in img,.frame .in video{will-change:transform}
+.pm--bleed{width:100%}
+.pm--right{width:56%;margin-left:auto;margin-right:var(--pad)}
+.pm--inset{width:calc(100% - var(--pad)*2);margin:0 auto}
+.pm--left{width:64%;margin-left:var(--pad)}
+.pm--center{width:44%;margin:0 auto}
+.pm figcaption{display:flex;justify-content:space-between;gap:20px;padding:14px var(--pad) 0;font-size:13px;color:var(--ink2)}
+.pm--right figcaption,.pm--left figcaption,.pm--inset figcaption,.pm--center figcaption{padding-left:0;padding-right:0}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:var(--pad);padding:0 var(--pad);align-items:end}
+.duo .pm:nth-child(2){margin-top:22vw}
+
+/* chapter */
+.chap{display:grid;grid-template-columns:1fr 3fr;gap:var(--pad);padding:clamp(80px,10vw,180px) var(--pad) clamp(40px,5vw,80px);align-items:end}
+.chap h2{margin:0;font-weight:400;font-size:clamp(44px,7.4vw,140px);line-height:.92;letter-spacing:-.055em}
+.chap .no{align-self:start;display:flex;flex-direction:column;gap:8px;color:var(--ink2)}
+.chap .desc{grid-column:2;max-width:560px;font-size:17px;line-height:1.55;color:var(--ink2);margin:28px 0 0}
+
+/* film */
+.film{position:relative;height:250vh;background:var(--bg)}
+.film .stick{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.film .vwrap{position:relative;width:100%;height:100%;overflow:hidden;will-change:clip-path}
+.film .vwrap video{position:absolute;inset:0}
+.film .ov{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:calc(var(--pad) + 70px) var(--pad) var(--pad);color:#fff;pointer-events:none;background:linear-gradient(180deg,rgba(10,22,27,.25),rgba(10,22,27,0) 30%,rgba(10,22,27,0) 60%,rgba(10,22,27,.5))}
+.film h2{margin:0;font-weight:400;font-size:clamp(48px,10vw,190px);line-height:.85;letter-spacing:-.06em}
+.film .bar{display:flex;justify-content:space-between;align-items:flex-end;gap:20px}
+.vbtn{pointer-events:auto;display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 18px;border-radius:999px;border:1px solid rgba(255,255,255,.6);background:rgba(255,255,255,.08);backdrop-filter:blur(8px);color:#fff;font:500 13px/1 "Inter Tight",sans-serif;letter-spacing:.04em;cursor:pointer}
+.vbtn svg{width:12px;height:12px}
+.time{font-variant-numeric:tabular-nums}
+
+/* statement */
+.state{padding:clamp(100px,14vw,240px) var(--pad);display:grid;grid-template-columns:1fr 3fr;gap:var(--pad)}
+.state p{margin:0;font-size:clamp(30px,4.4vw,80px);line-height:1.02;letter-spacing:-.045em}
+.state .w{opacity:.14;transition:none}
+
+/* identity horizontal */
+.ident{background:var(--tide);color:var(--ivory)}
+.ident .head{display:grid;grid-template-columns:1fr 3fr;gap:var(--pad);padding:clamp(80px,10vw,160px) var(--pad) clamp(40px,4vw,64px);align-items:end}
+.ident .head h2{margin:0;font-weight:400;font-size:clamp(44px,7.4vw,140px);line-height:.92;letter-spacing:-.055em}
+.ident .head .no{align-self:start;color:#aeb9b8;display:flex;flex-direction:column;gap:8px}
+.ident .sw{grid-column:2;display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.ident .sw span{display:inline-flex;align-items:center;gap:10px;height:34px;padding:0 14px 0 6px;border-radius:999px;border:1px solid rgba(247,243,236,.22);font-size:12px;letter-spacing:.06em}
+.ident .sw i{width:22px;height:22px;border-radius:50%;display:block;box-shadow:inset 0 0 0 1px rgba(247,243,236,.3)}
+.hpin{height:100vh;height:100svh;overflow:hidden;display:flex;align-items:center}
+.htrack{display:flex;gap:clamp(16px,2vw,32px);padding:0 var(--pad);will-change:transform}
+.hcard{flex:0 0 auto;width:min(72vw,1100px)}
+.hcard .frame{aspect-ratio:16/9;border-radius:4px}
+.hcard p{margin:14px 0 0;display:flex;justify-content:space-between;font-size:13px;color:#aeb9b8}
+.hcard.logo-card .frame{background:var(--ivory);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3vw;color:var(--tide)}
+.logo-card svg{width:16%}
+.wm{font-size:clamp(28px,4vw,72px);letter-spacing:.38em;padding-left:.38em;font-weight:300}
+
+/* social */
+.social{padding-bottom:clamp(80px,10vw,160px)}
+.sgrid{display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr;gap:clamp(10px,1.4vw,24px);padding:0 var(--pad);align-items:start}
+.phone{position:sticky;top:12vh;border-radius:clamp(20px,2.6vw,40px);overflow:hidden;aspect-ratio:9/16;background:#111;box-shadow:0 0 0 8px #0e1a1f, 0 40px 80px -30px rgba(20,42,50,.5)}
+.col{display:flex;flex-direction:column;gap:clamp(10px,1.4vw,24px);will-change:transform}
+.col .post{aspect-ratio:4/5;overflow:hidden;border-radius:3px;background:#d9d2c6}
+.col .post.sq{aspect-ratio:1/1}
+.marq{overflow:hidden;margin-top:clamp(60px,8vw,140px);padding:8px 0}
+.mtrack{display:flex;gap:14px;width:max-content;will-change:transform}
+.mtrack .post{width:clamp(150px,16vw,260px);aspect-ratio:4/5;flex:0 0 auto;border-radius:3px;overflow:hidden}
+
+/* process */
+.proc{border-top:1px solid rgba(20,42,50,.18);margin:0 var(--pad)}
+.step{display:grid;grid-template-columns:1fr 1.4fr 1.6fr;gap:var(--pad);padding:30px 0;border-bottom:1px solid rgba(20,42,50,.18);align-items:baseline;position:relative}
+.step .n{color:var(--ink2);font-variant-numeric:tabular-nums}
+.step h3{margin:0;font-weight:400;font-size:clamp(26px,2.8vw,48px);letter-spacing:-.04em;line-height:1}
+.step p{margin:0;font-size:16px;line-height:1.55;color:var(--ink2);max-width:520px}
+.step::before{content:"";position:absolute;left:0;right:0;top:0;bottom:-1px;background:var(--sand);transform:scaleY(0);transform-origin:bottom;transition:transform .6s var(--ease);z-index:-1}
+.step:hover::before{transform:none}
+.proc{position:relative;isolation:isolate}
+
+/* deliverables */
+.deliv{display:flex;flex-wrap:wrap;gap:10px;padding:clamp(40px,5vw,80px) var(--pad) 0}
+.deliv span{height:46px;padding:0 20px;border-radius:999px;border:1px solid rgba(20,42,50,.3);display:inline-flex;align-items:center;font-size:15px}
+
+/* end cta */
+.wend{padding:clamp(120px,16vw,260px) var(--pad);position:relative;text-align:center;overflow:hidden}
+.wend h2{margin:0 auto;font-weight:400;font-size:clamp(56px,11vw,210px);line-height:.86;letter-spacing:-.065em;max-width:14ch;position:relative;z-index:2}
+.wend .btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:clamp(36px,4vw,64px);position:relative;z-index:2}
+.wend .mail{margin-top:18px;font-size:14px;color:var(--ink2);position:relative;z-index:2}
+.fl{position:absolute;width:clamp(120px,15vw,260px);aspect-ratio:4/5;overflow:hidden;border-radius:4px;z-index:1;box-shadow:0 30px 60px -30px rgba(20,42,50,.45)}
+.fl--1{left:6%;top:16%;rotate:-7deg}
+.fl--2{right:7%;top:12%;rotate:6deg}
+.fl--3{right:16%;bottom:8%;rotate:-4deg;width:clamp(110px,12vw,210px)}
+.fl--4{left:14%;bottom:6%;rotate:5deg;width:clamp(100px,11vw,190px)}
+
+/* next */
+.next{position:relative;height:100vh;height:100svh;min-height:560px;overflow:hidden;display:block;color:#fff;background:var(--tide)}
+.next .in{position:absolute;inset:-10% 0;height:120%}
+.next::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,22,27,.2),rgba(10,22,27,.55))}
+.next .t{position:absolute;left:var(--pad);right:var(--pad);bottom:var(--pad);z-index:2;display:flex;justify-content:space-between;align-items:flex-end;gap:20px}
+.next h2{margin:0;font-weight:400;font-size:clamp(56px,12vw,230px);line-height:.84;letter-spacing:-.065em}
+.next .arrow{width:clamp(56px,6vw,96px);height:clamp(56px,6vw,96px);border-radius:50%;border:1px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;transition:background .5s var(--ease),transform .6s var(--ease)}
+.next:hover .arrow{background:#fff;color:var(--tide);transform:rotate(-45deg)}
+
+/* footer */
+footer{background:var(--tide);color:var(--ivory);padding:clamp(60px,8vw,120px) var(--pad) 28px}
+.fgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:var(--pad)}
+.fgrid h4{margin:0 0 16px;color:#aeb9b8}
+.fgrid p,.fgrid li{margin:0;font-size:15px;line-height:1.7}
+.fgrid ul{list-style:none;margin:0;padding:0}
+.fbig{font-size:clamp(34px,4vw,64px);letter-spacing:-.045em;line-height:1;margin:0}
+.fbot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:clamp(60px,8vw,120px);padding-top:22px;border-top:1px solid rgba(247,243,236,.18);font-size:13px;color:#aeb9b8}
+
+/* cursor */
+.cur{position:fixed;left:0;top:0;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:#fff;mix-blend-mode:difference;pointer-events:none;z-index:90;transition:width .4s var(--ease),height .4s var(--ease),margin .4s var(--ease);display:flex;align-items:center;justify-content:center}
+.cur span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#000;opacity:0;transition:opacity .3s}
+.cur.big{width:84px;height:84px;margin:-42px 0 0 -42px}
+.cur.big span{opacity:1}
+@media (hover:none){.cur{display:none}}
+
+/* responsive */
+@media (max-width:860px){
+  .nav ul{display:none}
+  .intro,.chap,.state,.ident .head{grid-template-columns:1fr}
+  .meta,.chap .desc,.ident .sw{grid-column:1}
+  .meta{grid-template-columns:1fr 1fr}
+  .intro p.big{text-indent:0}
+  .pm--right,.pm--left,.pm--center{width:calc(100% - var(--pad)*2);margin:0 auto}
+  .duo{grid-template-columns:1fr}.duo .pm:nth-child(2){margin-top:0}
+  .duo{padding:0}.duo .pm{width:calc(100% - var(--pad)*2);margin:0 auto}
+  .hero .side{display:none}
+  .sgrid{grid-template-columns:1fr 1fr}
+  .sgrid .phone{grid-column:1/-1;position:relative;top:0;width:70%;margin:0 auto 20px}
+  .sgrid .col:nth-child(4){display:none}
+  .step{grid-template-columns:1fr;gap:10px}
+  .fgrid{grid-template-columns:1fr 1fr}
+  .fl{display:none}
+  .hcard{width:84vw}
+  .hpin{height:auto;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:60px;scroll-snap-type:x mandatory}.hcard{scroll-snap-align:start}
+  .film{height:auto}.film .stick{position:relative;height:auto;aspect-ratio:16/9}
+}
+@media (prefers-reduced-motion:reduce){
+  .loader{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="loader" aria-hidden="true">
+  <div class="n"><span id="cnt">0</span></div>
+  <div class="mk">
+    <svg viewBox="0 0 96 72"><path d="M22 60V34A26 26 0 0 1 74 34V60" fill="none" stroke="#b77a55" stroke-width="2.5"/><line x1="2" y1="60" x2="94" y2="60" stroke="#f7f3ec" stroke-width="2.5"/></svg>
+    <span class="lbl">Crab Studio — Case 01</span>
+  </div>
+</div>
+
+<div class="progress" aria-hidden="true"></div>
+<div class="cur" aria-hidden="true"><span>View</span></div>
+
+<nav class="nav" aria-label="Main">
+  <a class="logo" href="../../index.html" aria-label="Crab Studio home"><i></i>Crab Studio</a>
+  <ul>
+    <li><a href="../../index.html#work">All work</a></li>
+    <li><a href="../real-estate/index.html">Real estate</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#film">Film</a></li>
+    <li><a href="#identity">Identity</a></li>
+    <li><a href="#social">Campaign</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="top">
+  <div class="bgimg"><img src="media/05_e05_hero.jpg" alt="Aurelle, the villa across the pool at golden hour" fetchpriority="high"></div>
+  <div class="tag"><span class="pill">Real estate</span><span class="pill">Concept · 2026</span></div>
+  <div class="txt">
+    <h1 aria-label="Aurelle"><span>A</span><span>u</span><span>r</span><span>e</span><span>l</span><span>l</span><span>e</span></h1>
+    <div class="side">
+      <span>Alibaug, across the bay from Mumbai</span>
+      <span class="scrollhint">Scroll <b></b></span>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="intro" id="work">
+  <span class="lbl" style="color:var(--ink2)">(Overview)</span>
+  <div>
+    <p class="big split">A coastal villa brand we imagined from nothing and built end to end: strategy, identity, a full 3D estate, photoreal imagery, a brand film and a launch campaign. <span class="it">All of it before a single brick.</span></p>
+    <dl class="meta">
+      <div><dt class="lbl">Client</dt><dd>Aurelle (concept)</dd></div>
+      <div><dt class="lbl">Location</dt><dd>Alibaug, India</dd></div>
+      <div><dt class="lbl">Services</dt><dd>Brand, 3D, CGI, Film, Social</dd></div>
+      <div><dt class="lbl">Year</dt><dd>2026</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="media">
+  <figure class="pm pm--bleed"><div class="frame" data-reveal><div class="in"><img src="media/01_e01_aerial.jpg" alt="Aurelle, the estate from above between forest and shore" loading="lazy"></div></div><figcaption><span>Aurelle, the estate from above</span><span>01</span></figcaption></figure>
+  <figure class="pm pm--right"><div class="frame" data-reveal><div class="in"><img src="media/03_e03_gate.jpg" alt="Aurelle, the timber gate" loading="lazy"></div></div><figcaption><span>The timber gate</span><span>02</span></figcaption></figure>
+  <figure class="pm pm--inset"><div class="frame" data-reveal><div class="in"><img src="media/04_e04_arrival.jpg" alt="Aurelle, arrival terrace" loading="lazy"></div></div><figcaption><span>Arrival, in hard morning sun</span><span>03</span></figcaption></figure>
+  <figure class="pm pm--left"><div class="frame" data-reveal><div class="in"><img src="media/18_c05_gate_detail.jpg" alt="Aurelle, gate detail" loading="lazy"></div></div><figcaption><span>Teak and lime plaster</span><span>04</span></figcaption></figure>
+  <figure class="pm pm--bleed"><div class="frame" data-reveal><div class="in"><img src="media/06_e06_lawn_sea.jpg" alt="Aurelle, the lawn running to the sea" loading="lazy"></div></div><figcaption><span>The lawn runs to the sea. Mumbai on the horizon</span><span>05</span></figcaption></figure>
+  <div class="duo">
+    <figure class="pm"><div class="frame" data-reveal style="--ar:4/5"><div class="in"><img src="media/15_c02_pool_edge.jpg" alt="Aurelle, pool edge" loading="lazy"></div></div><figcaption><span>Pool edge</span><span>06</span></figcaption></figure>
+    <figure class="pm"><div class="frame" data-reveal style="--ar:4/5"><div class="in"><img src="media/16_c03_lounger.jpg" alt="Aurelle, loungers in hard shadow" loading="lazy"></div></div><figcaption><span>Midday</span><span>07</span></figcaption></figure>
+  </div>
+  <figure class="pm pm--inset"><div class="frame" data-reveal><div class="in"><img src="media/13_e11_side.jpg" alt="Aurelle, the villa in misty light" loading="lazy"></div></div><figcaption><span>The side terrace, after rain</span><span>08</span></figcaption></figure>
+</section>
+
+<section class="film" id="film">
+  <div class="stick">
+    <div class="vwrap">
+      <video id="filmv" src="media/film.mp4" poster="media/film_poster.jpg" muted loop playsinline preload="metadata"></video>
+      <div class="ov">
+        <span class="lbl">(Brand film)</span>
+        <div class="bar">
+          <h2>Sea to<br><span class="it">night.</span></h2>
+          <div style="display:flex;gap:10px;align-items:center">
+            <span class="time lbl" id="ftime">0:00 / 0:58</span>
+            <button class="vbtn" id="fbtn" type="button" aria-label="Pause film"><svg viewBox="0 0 12 12" id="ficon"><rect x="2" y="1" width="2.6" height="10" fill="#fff"/><rect x="7.4" y="1" width="2.6" height="10" fill="#fff"/></svg><span id="flbl">Pause</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chap">
+  <div class="no lbl"><span>(02)</span><span>Inside</span></div>
+  <h2 class="split">Rooms that <span class="it">breathe.</span></h2>
+  <p class="desc">Deep verandas, a courtyard open to the sky and pale stone floors that hold the light. Every interior is lit by the same sun as the exterior shots.</p>
+</section>
+
+<section class="media">
+  <figure class="pm pm--bleed"><div class="frame" data-reveal><div class="in"><img src="media/09_i01_living.jpg" alt="Aurelle, living room" loading="lazy"></div></div><figcaption><span>Living room, open to the sea</span><span>09</span></figcaption></figure>
+  <figure class="pm pm--right"><div class="frame" data-reveal><div class="in"><img src="media/12_i04_courtyard.jpg" alt="Aurelle, courtyard" loading="lazy"></div></div><figcaption><span>The frangipani courtyard</span><span>10</span></figcaption></figure>
+  <figure class="pm pm--left"><div class="frame" data-reveal><div class="in"><img src="media/19_c06_canopy.jpg" alt="Aurelle, light through the canopy" loading="lazy"></div></div><figcaption><span>Light through the canopy</span><span>11</span></figcaption></figure>
+  <figure class="pm pm--inset"><div class="frame" data-reveal><div class="in"><img src="media/11_i03_veranda.jpg" alt="Aurelle, veranda" loading="lazy"></div></div><figcaption><span>The veranda</span><span>12</span></figcaption></figure>
+  <div class="duo">
+    <figure class="pm"><div class="frame" data-reveal style="--ar:4/5"><div class="in"><img src="media/10_i02_bedroom.jpg" alt="Aurelle, master bedroom" loading="lazy"></div></div><figcaption><span>Master bedroom</span><span>13</span></figcaption></figure>
+    <figure class="pm"><div class="frame" data-reveal style="--ar:4/5"><div class="in"><img src="media/10_spa_bath.jpg" alt="Aurelle, stone bath" loading="lazy"></div></div><figcaption><span>Stone bath</span><span>14</span></figcaption></figure>
+  </div>
+  <figure class="pm pm--bleed"><div class="frame" data-reveal><div class="in"><img src="media/22_c09_dining.jpg" alt="Aurelle, dining under the pergola" loading="lazy"></div></div><figcaption><span>Dining under the pergola</span><span>15</span></figcaption></figure>
+  <figure class="pm pm--right"><div class="frame" data-reveal><div class="in"><img src="media/09_kitchen.jpg" alt="Aurelle, kitchen" loading="lazy"></div></div><figcaption><span>Kitchen</span><span>16</span></figcaption></figure>
+</section>
+
+<section class="state">
+  <span class="lbl" style="color:var(--ink2)">(Approach)</span>
+  <p id="statement">Every frame comes from one 3D model of the estate. Same house, same garden, same sun. That is why it looks shot, not generated.</p>
+</section>
+
+<section class="ident" id="identity">
+  <div class="head">
+    <div class="no lbl"><span>(03)</span><span>Identity</span></div>
+    <div>
+      <h2 class="split">An arch, <span class="it">and the horizon.</span></h2>
+      <div class="sw">
+        <span><i style="background:#142a32"></i>Deep Tide</span>
+        <span><i style="background:#f7f3ec"></i>Ivory</span>
+        <span><i style="background:#e9ddc9"></i>Sand</span>
+        <span><i style="background:#89958a"></i>Sage</span>
+        <span><i style="background:#b77a55"></i>Copper</span>
+      </div>
+    </div>
+  </div>
+  <div class="hpin">
+    <div class="htrack">
+      <div class="hcard logo-card"><div class="frame"><svg viewBox="0 0 96 72" aria-hidden="true"><path d="M22 60V34A26 26 0 0 1 74 34V60" fill="none" stroke="#142a32" stroke-width="2"/><line x1="2" y1="60" x2="94" y2="60" stroke="#142a32" stroke-width="2"/></svg><div class="wm">AURELLE</div></div><p><span>The mark</span><span>01</span></p></div>
+      <div class="hcard"><div class="frame"><img src="media/mock_wall.jpg" alt="Aurelle logo on a lime plaster wall" loading="lazy"></div><p><span>Logo on lime plaster</span><span>02</span></p></div>
+      <div class="hcard"><div class="frame"><img src="media/mock_cards.jpg" alt="Aurelle business cards" loading="lazy"></div><p><span>Cards</span><span>03</span></p></div>
+      <div class="hcard"><div class="frame"><img src="media/mock_stationery.jpg" alt="Aurelle stationery" loading="lazy"></div><p><span>Stationery</span><span>04</span></p></div>
+      <div class="hcard"><div class="frame"><img src="media/mock_gate.jpg" alt="Aurelle gate signage" loading="lazy"></div><p><span>Gate signage</span><span>05</span></p></div>
+      <div class="hcard"><div class="frame"><img src="media/mock_box.jpg" alt="Aurelle welcome box" loading="lazy"></div><p><span>Welcome box</span><span>06</span></p></div>
+      <div class="hcard"><div class="frame"><img src="media/mock_book.jpg" alt="Aurelle brochure" loading="lazy"></div><p><span>The brochure</span><span>07</span></p></div>
+      <div class="hcard"><div class="frame"><img src="media/mock_phone.jpg" alt="Aurelle Instagram on a phone" loading="lazy"></div><p><span>Instagram</span><span>08</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="chap">
+  <div class="no lbl"><span>(04)</span><span>Life</span></div>
+  <h2 class="split">Built for long <span class="it">weekends.</span></h2>
+  <p class="desc">One consistent family across stills and film. Morning mist, a game on the lawn, dinner as the monsoon rolls in.</p>
+</section>
+
+<section class="media">
+  <figure class="pm pm--bleed"><div class="frame" data-reveal><div class="in"><img src="media/03_a9iii_family_lawn.jpg" alt="Aurelle, family playing on the lawn by the sea" loading="lazy"></div></div><figcaption><span>The lawn, with the city across the water</span><span>17</span></figcaption></figure>
+  <figure class="pm pm--right"><div class="frame" data-reveal><div class="in"><img src="media/05_sun_terrace_couple.jpg" alt="Aurelle, couple on the sun terrace" loading="lazy"></div></div><figcaption><span>The upper terrace</span><span>18</span></figcaption></figure>
+  <figure class="pm pm--inset"><div class="frame" data-reveal><div class="in"><img src="media/07_monsoon_dinner.jpg" alt="Aurelle, monsoon dinner" loading="lazy"></div></div><figcaption><span>Monsoon dinner</span><span>19</span></figcaption></figure>
+  <div class="duo">
+    <figure class="pm"><div class="frame" data-reveal style="--ar:4/5"><div class="in"><img src="media/06_sunrise_mist.jpg" alt="Aurelle, sunrise mist" loading="lazy"></div></div><figcaption><span>Sunrise</span><span>20</span></figcaption></figure>
+    <figure class="pm"><div class="frame" data-reveal style="--ar:4/5"><div class="in"><img src="media/17_c04_firepit.jpg" alt="Aurelle, fire pit" loading="lazy"></div></div><figcaption><span>Fire pit</span><span>21</span></figcaption></figure>
+  </div>
+  <figure class="pm pm--bleed"><div class="frame" data-reveal><div class="in"><img src="media/07_e07_beach_back.jpg" alt="Aurelle, the villa from the beach at dusk" loading="lazy"></div></div><figcaption><span>From the beach, blue hour</span><span>22</span></figcaption></figure>
+</section>
+
+<section class="social" id="social">
+  <div class="chap">
+    <div class="no lbl"><span>(05)</span><span>Campaign</span></div>
+    <h2 class="split">The quiet <span class="it">hours.</span></h2>
+    <p class="desc">One day at Aurelle, told hour by hour. A launch grid, carousels, square motion posts and a 23-second reel.</p>
+  </div>
+  <div class="sgrid">
+    <div class="phone"><video src="media/reel.mp4" muted loop playsinline autoplay preload="metadata" aria-label="Aurelle launch reel"></video></div>
+    <div class="col" data-speed="-6">
+      <div class="post"><img src="media/s126_post_1_4x5.jpg" alt="Aurelle post" loading="lazy"></div>
+      <div class="post sq"><video src="media/sq1.mp4" muted loop playsinline autoplay preload="none"></video></div>
+      <div class="post"><img src="media/s126_post_4_4x5.jpg" alt="Aurelle post" loading="lazy"></div>
+    </div>
+    <div class="col" data-speed="8">
+      <div class="post"><img src="media/s126_post_2_4x5.jpg" alt="Aurelle post" loading="lazy"></div>
+      <div class="post"><img src="media/s126_post_5_4x5.jpg" alt="Aurelle post" loading="lazy"></div>
+      <div class="post sq"><video src="media/sq2.mp4" muted loop playsinline autoplay preload="none"></video></div>
+    </div>
+    <div class="col" data-speed="-3">
+      <div class="post sq"><video src="media/sq3.mp4" muted loop playsinline autoplay preload="none"></video></div>
+      <div class="post"><img src="media/s126_post_3_4x5.jpg" alt="Aurelle post" loading="lazy"></div>
+      <div class="post"><img src="media/s126_post_6_4x5.jpg" alt="Aurelle post" loading="lazy"></div>
+    </div>
+  </div>
+  <div class="marq" aria-hidden="true">
+    <div class="mtrack">
+      <div class="post"><img src="media/s075_post_01.jpg" alt="" loading="lazy"></div><div class="post"><img src="media/s075_post_02.jpg" alt="" loading="lazy"></div><div class="post"><img src="media/s075_post_03.jpg" alt="" loading="lazy"></div><div class="post"><img src="media/s075_post_04.jpg" alt="" loading="lazy"></div><div class="post"><img src="media/s075_post_05.jpg" alt="" loading="lazy"></div><div class="post"><img src="media/s075_post_06.jpg" alt="" loading="lazy"></div><div class="post"><img src="media/s075_post_07.jpg" alt="" loading="lazy"></div><div class="post"><img src="media/s075_post_08.jpg" alt="" loading="lazy"></div><div class="post"><img src="media/s075_post_09.jpg" alt="" loading="lazy"></div>
+    </div>
+  </div>
+
+  <div id="carousel" style="padding:clamp(48px,6vw,96px) 0 0"><div style="padding:0 clamp(20px,4vw,64px);margin-bottom:24px;display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap"><p style="margin:0;font-size:clamp(22px,2.4vw,34px);letter-spacing:-.02em;line-height:1.1">The Instagram carousel: <span style="font-family:'Cormorant Garamond',serif;font-style:italic">seven slides, one coastline.</span></p><span style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;opacity:.6">Swipe →</span></div><div style="display:flex;gap:clamp(10px,1.2vw,20px);overflow-x:auto;scroll-snap-type:x mandatory;padding:0 clamp(20px,4vw,64px) 12px;-webkit-overflow-scrolling:touch"><figure style="flex:0 0 clamp(220px,26vw,380px);margin:0;scroll-snap-align:start"><img src="media/carousel-01.jpg" alt="Aurelle Instagram carousel, slide 1 of 7" loading="lazy" style="width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:clamp(8px,0.8vw,14px);display:block"><figcaption style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.6;margin-top:10px">01 / 07</figcaption></figure><figure style="flex:0 0 clamp(220px,26vw,380px);margin:0;scroll-snap-align:start"><img src="media/carousel-02.jpg" alt="Aurelle Instagram carousel, slide 2 of 7" loading="lazy" style="width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:clamp(8px,0.8vw,14px);display:block"><figcaption style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.6;margin-top:10px">02 / 07</figcaption></figure><figure style="flex:0 0 clamp(220px,26vw,380px);margin:0;scroll-snap-align:start"><img src="media/carousel-03.jpg" alt="Aurelle Instagram carousel, slide 3 of 7" loading="lazy" style="width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:clamp(8px,0.8vw,14px);display:block"><figcaption style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.6;margin-top:10px">03 / 07</figcaption></figure><figure style="flex:0 0 clamp(220px,26vw,380px);margin:0;scroll-snap-align:start"><img src="media/carousel-04.jpg" alt="Aurelle Instagram carousel, slide 4 of 7" loading="lazy" style="width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:clamp(8px,0.8vw,14px);display:block"><figcaption style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.6;margin-top:10px">04 / 07</figcaption></figure><figure style="flex:0 0 clamp(220px,26vw,380px);margin:0;scroll-snap-align:start"><img src="media/carousel-05.jpg" alt="Aurelle Instagram carousel, slide 5 of 7" loading="lazy" style="width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:clamp(8px,0.8vw,14px);display:block"><figcaption style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.6;margin-top:10px">05 / 07</figcaption></figure><figure style="flex:0 0 clamp(220px,26vw,380px);margin:0;scroll-snap-align:start"><img src="media/carousel-06.jpg" alt="Aurelle Instagram carousel, slide 6 of 7" loading="lazy" style="width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:clamp(8px,0.8vw,14px);display:block"><figcaption style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.6;margin-top:10px">06 / 07</figcaption></figure><figure style="flex:0 0 clamp(220px,26vw,380px);margin:0;scroll-snap-align:start"><img src="media/carousel-07.jpg" alt="Aurelle Instagram carousel, slide 7 of 7" loading="lazy" style="width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:clamp(8px,0.8vw,14px);display:block"><figcaption style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.6;margin-top:10px">07 / 07</figcaption></figure></div></div>
+</section>
+
+<section>
+  <div class="chap" style="padding-top:0">
+    <div class="no lbl"><span>(06)</span><span>Process</span></div>
+    <h2 class="split">From site plan <span class="it">to screen.</span></h2>
+  </div>
+  <div class="proc">
+    <div class="step"><span class="n lbl">01</span><h3>Strategy</h3><p>Buyer, positioning and story. A calm coastal home with the city on the horizon.</p></div>
+    <div class="step"><span class="n lbl">02</span><h3>Identity</h3><p>Arch mark, wordmark, a palette taken from the site, and a system for every format.</p></div>
+    <div class="step"><span class="n lbl">03</span><h3>3D estate</h3><p>A 68 × 48 m plot, G+1 with a leisure basement, five bedrooms, an 18 × 5 m pool and an 8 × 8 m courtyard, built in Blender.</p></div>
+    <div class="step"><span class="n lbl">04</span><h3>Photoreal stills</h3><p>Blender renders set the layout. Each is lifted to photography, matched to real reference for hard sun and crisp shadow.</p></div>
+    <div class="step"><span class="n lbl">05</span><h3>Film</h3><p>Blender camera moves drive the video, so the film keeps the real geometry from sea to night.</p></div>
+    <div class="step"><span class="n lbl">06</span><h3>Launch</h3><p>Brochure, identity book, mockups, a social grid, carousels, motion posts and a reel.</p></div>
+  </div>
+  <div class="deliv">
+    <span>Brand strategy</span><span>Visual identity</span><span>Brand guidelines</span><span>3D estate model</span><span>Walkthrough</span><span>Photoreal stills</span><span>Brochure</span><span>Mockups</span><span>Brand film</span><span>Social campaign</span><span>Reel</span><span>Website</span>
+  </div>
+</section>
+
+<section class="wend" id="contact">
+  <div class="fl fl--1" data-float="-30"><img src="media/14_c01_pergola.jpg" alt="" loading="lazy"></div>
+  <div class="fl fl--2" data-float="40"><img src="media/s126_post_5_4x5.jpg" alt="" loading="lazy"></div>
+  <div class="fl fl--3" data-float="-50"><img src="media/21_c08_bedroom_seat.jpg" alt="" loading="lazy"></div>
+  <div class="fl fl--4" data-float="25"><img src="media/08_e10_sun_terrace.jpg" alt="" loading="lazy"></div>
+  <h2 class="split">Your project could be <span class="it">next.</span></h2>
+  <div class="btns">
+    <a class="cta" href="../../index.html#contact">Start a project <span aria-hidden="true">→</span></a>
+    <a class="cta ghost" href="#work">See the work again</a>
+  </div>
+  <p class="mail">media.crabstudio@gmail.com</p>
+</section>
+
+<a class="next" href="../artha-developers/index.html" aria-label="Next project: Artha Developers">
+  <div class="in"><img src="../artha-developers/media/g00-tower.jpg" alt="" loading="lazy"></div>
+  <div class="t">
+    <div>
+      <span class="lbl" style="display:block;margin-bottom:18px">Next project · Real estate · Brand world</span>
+      <h2>Artha Developers</h2>
+    </div>
+    <span class="arrow" aria-hidden="true">→</span>
+  </div>
+</a>
+</main>
+
+<footer>
+  <div class="fgrid">
+    <div><p class="fbig">Show your project<br><span class="it">the way it will be.</span></p></div>
+    <div><h4 class="lbl">Studio</h4><ul><li>Crab Studio</li><li>Ahmedabad, India</li></ul></div>
+    <div><h4 class="lbl">Services</h4><ul><li>Brand identity</li><li>3D &amp; CGI</li><li>Film</li><li>Social</li></ul></div>
+    <div><h4 class="lbl">Contact</h4><ul><li><a href="mailto:media.crabstudio@gmail.com">media.crabstudio@gmail.com</a></li><li>+91 92136 37784</li><li>+91 63554 13089</li></ul></div>
+  </div>
+  <div class="fbot"><span>© 2026 Crab Studio</span><span>Aurelle is a concept project. Images are AI-assisted visualisations.</span></div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasGsap = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+  var loader = document.querySelector('.loader');
+  if(!hasGsap){ if(loader) loader.remove(); return; }
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ---------- Lenis ---------- */
+  var lenis = null;
+  if(!reduce && typeof Lenis !== 'undefined'){
+    lenis = new Lenis({ lerp:0.085, smoothWheel:true, wheelMultiplier:0.9 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(function(t){ lenis.raf(t*1000); });
+    gsap.ticker.lagSmoothing(0);
+    lenis.stop();
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var id = a.getAttribute('href'); var el = id.length>1 ? document.querySelector(id) : null;
+      if(!el) return; e.preventDefault();
+      if(lenis) lenis.scrollTo(el, {duration:1.6}); else el.scrollIntoView({behavior:'smooth'});
+    });
+  });
+
+  /* ---------- split text into lines ---------- */
+  function splitLines(el){
+    var nodes = Array.from(el.childNodes), words = [];
+    nodes.forEach(function(n){
+      if(n.nodeType === 3){ n.textContent.split(/(\s+)/).forEach(function(w){ if(w.trim()) words.push({t:w,cls:''}); }); }
+      else { (n.textContent||'').split(/(\s+)/).forEach(function(w){ if(w.trim()) words.push({t:w,cls:n.className||''}); }); }
+    });
+    el.innerHTML = words.map(function(w){ return '<span class="w '+w.cls+'" style="display:inline-block">'+w.t+'</span>'; }).join(' ');
+    var lines = [], top = null, cur = [];
+    el.querySelectorAll('.w').forEach(function(w){
+      var t = w.offsetTop; if(top === null || Math.abs(t-top) > 4){ if(cur.length) lines.push(cur); cur=[]; top=t; } cur.push(w);
+    });
+    if(cur.length) lines.push(cur);
+    el.innerHTML = lines.map(function(l){ return '<span class="line"><span>'+l.map(function(w){return w.outerHTML;}).join(' ')+'</span></span>'; }).join('');
+    return el.querySelectorAll('.line>span');
+  }
+
+  /* ---------- loader + hero intro ---------- */
+  var heroLetters = document.querySelectorAll('.hero h1 span');
+  var heroImg = document.querySelector('.hero .bgimg img');
+  gsap.set(heroLetters, { yPercent:110 });
+  gsap.set(heroImg, { scale:1.18 });
+  gsap.set('.hero .tag, .hero .side, .nav', { opacity:0 });
+
+  function intro(){
+    var tl = gsap.timeline({ onComplete:function(){ if(lenis) lenis.start(); } });
+    tl.to(loader, { yPercent:-100, duration:1.1, ease:'expo.inOut' })
+      .to(heroImg, { scale:1, duration:2.2, ease:'expo.out' }, '-=0.7')
+      .to(heroLetters, { yPercent:0, duration:1.4, ease:'expo.out', stagger:0.05 }, '-=2.0')
+      .to('.hero .tag, .hero .side, .nav', { opacity:1, duration:1, ease:'power2.out' }, '-=1.0')
+      .add(function(){ loader && loader.remove(); });
+  }
+  var cnt = document.getElementById('cnt');
+  if(reduce || !loader){ gsap.set(heroLetters,{yPercent:0}); gsap.set(heroImg,{scale:1}); gsap.set('.hero .tag, .hero .side, .nav',{opacity:1}); if(loader) loader.remove(); if(lenis) lenis.start(); }
+  else {
+    var o = {v:0};
+    gsap.to(o, { v:100, duration:1.5, ease:'power3.inOut', onUpdate:function(){ cnt.textContent = Math.round(o.v); }, onComplete:intro });
+  }
+
+  /* hero parallax */
+  gsap.to('.hero .bgimg', { yPercent:18, ease:'none', scrollTrigger:{ trigger:'.hero', start:'top top', end:'bottom top', scrub:true } });
+  gsap.to('.hero .txt', { yPercent:-40, opacity:0, ease:'none', scrollTrigger:{ trigger:'.hero', start:'30% top', end:'bottom top', scrub:true } });
+
+  /* progress + nav hide */
+  gsap.to('.progress', { scaleX:1, ease:'none', scrollTrigger:{ start:0, end:'max', scrub:0.3 } });
+  var nav = document.querySelector('.nav'), lastY = 0;
+  ScrollTrigger.create({ start:0, end:'max', onUpdate:function(s){ var y = s.scroll(); nav.classList.toggle('hide', y > lastY && y > 300); lastY = y; } });
+
+  if(reduce) return;
+
+  /* text line reveals */
+  document.fonts && document.fonts.ready.then(setupText);
+  if(!document.fonts) setupText();
+  function setupText(){
+    document.querySelectorAll('.split').forEach(function(el){
+      var lines = splitLines(el);
+      gsap.from(lines, { yPercent:110, duration:1.3, ease:'expo.out', stagger:0.08, scrollTrigger:{ trigger:el, start:'top 85%' } });
+    });
+    /* statement scrub word by word */
+    var st = document.getElementById('statement');
+    if(st){
+      st.innerHTML = st.textContent.split(' ').map(function(w){ return '<span class="w">'+w+'</span>'; }).join(' ');
+      gsap.to(st.querySelectorAll('.w'), { opacity:1, stagger:0.1, ease:'none', scrollTrigger:{ trigger:st, start:'top 80%', end:'bottom 45%', scrub:true } });
+    }
+    gsap.from('.meta > div', { y:24, opacity:0, duration:1, ease:'expo.out', stagger:0.08, scrollTrigger:{ trigger:'.meta', start:'top 90%' } });
+    ScrollTrigger.refresh();
+  }
+
+  /* media reveal: crop open + inner zoom + parallax */
+  document.querySelectorAll('[data-reveal]').forEach(function(f){
+    var inner = f.querySelector('.in');
+    var tl = gsap.timeline({ scrollTrigger:{ trigger:f, start:'top 95%', end:'top 35%', scrub:1 } });
+    tl.fromTo(f, { clipPath:'inset(14% 10% 14% 10%)' }, { clipPath:'inset(0% 0% 0% 0%)', ease:'none' }, 0)
+      .fromTo(inner.firstElementChild, { scale:1.3 }, { scale:1, ease:'none' }, 0);
+    gsap.fromTo(inner, { yPercent:-6 }, { yPercent:6, ease:'none', scrollTrigger:{ trigger:f, start:'top bottom', end:'bottom top', scrub:true } });
+  });
+
+  /* film: grow from inset to full bleed */
+  var mm = gsap.matchMedia();
+  mm.add('(min-width: 861px)', function(){
+    gsap.fromTo('.film .vwrap', { clipPath:'inset(18% 22% 18% 22% round 18px)' }, { clipPath:'inset(0% 0% 0% 0% round 0px)', ease:'none', scrollTrigger:{ trigger:'.film', start:'top top', end:'45% top', scrub:1 } });
+    gsap.fromTo('.film video', { scale:1.25 }, { scale:1, ease:'none', scrollTrigger:{ trigger:'.film', start:'top top', end:'45% top', scrub:1 } });
+    gsap.from('.film .ov', { opacity:0, ease:'none', scrollTrigger:{ trigger:'.film', start:'25% top', end:'45% top', scrub:true } });
+
+    /* identity horizontal */
+    var track = document.querySelector('.htrack');
+    gsap.to(track, { x:function(){ return -(track.scrollWidth - window.innerWidth); }, ease:'none',
+      scrollTrigger:{ trigger:'.hpin', start:'top top', end:function(){ return '+=' + (track.scrollWidth - window.innerWidth); }, pin:true, scrub:1, invalidateOnRefresh:true, anticipatePin:1 } });
+
+    /* social columns parallax */
+    document.querySelectorAll('.col[data-speed]').forEach(function(c){
+      var s = parseFloat(c.dataset.speed);
+      gsap.fromTo(c, { yPercent:s }, { yPercent:-s, ease:'none', scrollTrigger:{ trigger:'.sgrid', start:'top bottom', end:'bottom top', scrub:true } });
+    });
+  });
+
+  /* film controls */
+  var v = document.getElementById('filmv'), fb = document.getElementById('fbtn'), fl = document.getElementById('flbl'), fi = document.getElementById('ficon'), ft = document.getElementById('ftime'), userPaused = false;
+  function fmt(s){ s = Math.floor(s||0); return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2); }
+  ScrollTrigger.create({ trigger:'.film', start:'top 70%', end:'bottom 30%',
+    onToggle:function(s){ if(s.isActive && !userPaused){ v.play().catch(function(){}); } else { v.pause(); } } });
+  v.addEventListener('timeupdate', function(){ ft.textContent = fmt(v.currentTime)+' / '+fmt(v.duration||58); });
+  function setIcon(){ var p = v.paused; fl.textContent = p ? 'Play' : 'Pause'; fb.setAttribute('aria-label', p ? 'Play film' : 'Pause film');
+    fi.innerHTML = p ? '<path d="M2 1l9 5-9 5z" fill="#fff"/>' : '<rect x="2" y="1" width="2.6" height="10" fill="#fff"/><rect x="7.4" y="1" width="2.6" height="10" fill="#fff"/>'; }
+  v.addEventListener('play', setIcon); v.addEventListener('pause', setIcon);
+  fb.addEventListener('click', function(){ if(v.paused){ userPaused=false; v.play().catch(function(){}); } else { userPaused=true; v.pause(); } });
+
+  /* play small videos only in view */
+  var io = new IntersectionObserver(function(es){ es.forEach(function(e){ var vid=e.target; if(vid===v) return; if(e.isIntersecting){ vid.preload='auto'; vid.play().catch(function(){}); } else vid.pause(); }); }, { rootMargin:'200px' });
+  document.querySelectorAll('.social video').forEach(function(x){ io.observe(x); });
+
+  /* marquee driven by time + scroll velocity */
+  var mt = document.querySelector('.mtrack');
+  mt.innerHTML += mt.innerHTML;
+  var mx = 0, vel = 0;
+  if(lenis) lenis.on('scroll', function(e){ vel = e.velocity || 0; });
+  gsap.ticker.add(function(){
+    var half = mt.scrollWidth/2; mx -= 0.6 + Math.abs(vel)*0.35; vel *= 0.92;
+    if(-mx >= half) mx += half; mt.style.transform = 'translate3d('+mx+'px,0,0)';
+  });
+
+  /* end CTA floating pictures */
+  document.querySelectorAll('.fl[data-float]').forEach(function(el){
+    var d = parseFloat(el.dataset.float);
+    gsap.fromTo(el, { y:d*3 }, { y:-d*3, ease:'none', scrollTrigger:{ trigger:'.wend', start:'top bottom', end:'bottom top', scrub:true } });
+  });
+  var wend = document.querySelector('.wend');
+  wend.addEventListener('mousemove', function(e){
+    var r = wend.getBoundingClientRect(), cx = (e.clientX - r.left)/r.width - .5, cy = (e.clientY - r.top)/r.height - .5;
+    document.querySelectorAll('.fl').forEach(function(el,i){ var k = (i%2?1:-1)*(14+i*6); gsap.to(el, { x:cx*k, rotateZ:cx*4*(i%2?1:-1), duration:1.2, ease:'expo.out', overwrite:'auto' }); });
+  });
+
+  /* next parallax */
+  gsap.fromTo('.next .in', { yPercent:-10 }, { yPercent:10, ease:'none', scrollTrigger:{ trigger:'.next', start:'top bottom', end:'bottom top', scrub:true } });
+
+  /* cursor */
+  var cur = document.querySelector('.cur');
+  if(window.matchMedia('(hover:hover)').matches){
+    var xTo = gsap.quickTo(cur, 'x', { duration:0.5, ease:'power3' }), yTo = gsap.quickTo(cur, 'y', { duration:0.5, ease:'power3' });
+    window.addEventListener('mousemove', function(e){ xTo(e.clientX); yTo(e.clientY); });
+    document.querySelectorAll('[data-reveal], .hcard .frame, .post, .phone').forEach(function(el){
+      el.addEventListener('mouseenter', function(){ cur.classList.add('big'); });
+      el.addEventListener('mouseleave', function(){ cur.classList.remove('big'); });
+    });
+  }
+
+  window.addEventListener('load', function(){ ScrollTrigger.refresh(); });
+})();
+</script>
+</body>
+</html>
