@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crab Studio — Brand films, motion, social and identity</title>
+<meta name="description" content="Crab Studio is a creative studio in India making brand films, motion design, social content, 3D walkthroughs and identities for brands worldwide.">
+<meta property="og:title" content="Crab Studio — Brand films, motion, social and identity"><meta property="og:description" content="Crab Studio is a creative studio in India making brand films, motion design, social content, 3D walkthroughs and identities for brands worldwide."><meta property="og:image" content="work/aurelle/media/05_e05_hero.jpg">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="assets/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/crab.css">
+<style>
+/* home */
+.hx-hero{position:relative;height:100vh;height:100svh;min-height:620px;overflow:hidden;background:#000;color:#fff}
+.hx-media{position:absolute;inset:0}
+.hx-media video{opacity:.9}
+.hx-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,7,10,.55) 0%,rgba(7,7,10,0) 26%,rgba(7,7,10,0) 48%,rgba(7,7,10,.82) 100%);pointer-events:none}
+.hx-in{position:absolute;left:var(--pad);right:var(--pad);bottom:clamp(20px,3.4vw,48px);z-index:2;display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:var(--pad);align-items:end}
+.hx-h{margin:0;font-weight:400;font-size:clamp(60px,10.4vw,196px);line-height:.84;letter-spacing:-.065em}
+.hx-h .l{display:block;overflow:hidden;padding-bottom:.05em}
+.hx-h span{display:inline-block}
+.hx-side{display:flex;flex-direction:column;gap:22px;padding-bottom:1vw}
+.hx-side p{margin:0;font-size:clamp(16px,1.25vw,19px);line-height:1.45;color:#d6d9e2;max-width:440px}
+.hx-btns{display:flex;gap:10px;flex-wrap:wrap}
+.hx-tc{position:absolute;top:88px;right:var(--pad);z-index:2;display:flex;gap:12px;align-items:center;font-size:12px;letter-spacing:.12em;color:#cfd3dd;font-variant-numeric:tabular-nums}
+.hx-tc i{width:8px;height:8px;border-radius:50%;background:#ff3b30;box-shadow:0 0 12px #ff3b30;animation:rec 1.4s steps(2) infinite}
+@keyframes rec{50%{opacity:.2}}
+.hx-disc{position:absolute;top:88px;left:var(--pad);z-index:2;display:flex;gap:8px;flex-wrap:wrap}
+.hx-disc span{min-height:30px;padding:0 13px;border-radius:999px;border:1px solid rgba(255,255,255,.35);display:inline-flex;align-items:center;font-size:12px;letter-spacing:.06em;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);background:rgba(255,255,255,.06)}
+.ticker{color:var(--ink)}
+.wjump{display:flex;gap:8px;flex-wrap:wrap;padding:0 var(--pad) 10px}
+.wjump a{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--line);display:inline-flex;align-items:center;gap:8px;font-size:14px;transition:background .3s,color .3s}
+.wjump a:hover{background:var(--ink);color:var(--bg)}
+.wjump span{opacity:.55;font-variant-numeric:tabular-nums}
+
+.about{display:grid;grid-template-columns:1fr 3fr;gap:var(--pad);padding:clamp(90px,11vw,180px) var(--pad) clamp(60px,7vw,110px)}
+.about h2{margin:0;font-weight:400;font-size:clamp(40px,6vw,112px);line-height:.94;letter-spacing:-.055em;text-wrap:balance}
+.about .cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--pad);margin-top:clamp(30px,4vw,60px);max-width:1000px}
+.about .cols p{margin:0;font-size:17px;line-height:1.6;color:var(--ink2)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--pad);margin:clamp(50px,6vw,100px) 0 0;border-top:1px solid var(--line);padding-top:24px}
+.stat b{display:block;font-weight:300;font-size:clamp(48px,6vw,104px);line-height:.9;letter-spacing:-.06em;font-variant-numeric:tabular-nums}
+.stat span{display:block;margin-top:12px;font-size:14px;color:var(--ink2);max-width:220px}
+
+.re{background:#0d1526;color:#eef2fb;--line:rgba(238,242,251,.16);--ink2:#9fb0cf}
+.re .chap .no,.re .chap .desc{color:#9fb0cf}
+.mq{overflow:hidden;padding:10px 0 20px}
+.mtrack{display:flex;gap:16px;width:max-content;will-change:transform}
+.mtrack .ph{flex:0 0 auto;width:clamp(150px,15vw,230px);aspect-ratio:9/16;border-radius:18px;overflow:hidden;background:#1a2440;cursor:pointer;position:relative}
+.mtrack .ph span{position:absolute;left:10px;bottom:10px;right:10px;font-size:12px;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.7)}
+.offer{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--pad);padding:clamp(50px,6vw,90px) var(--pad) 0}
+.offer div{border-top:1px solid var(--line);padding-top:18px}
+.offer h3{margin:12px 0 0;font-weight:400;font-size:clamp(22px,2vw,30px);letter-spacing:-.03em;line-height:1.05}
+.offer p{margin:10px 0 0;font-size:15px;line-height:1.55;color:#9fb0cf}
+.offer a{display:inline-block;margin-top:12px;font-size:14px;border-bottom:1px solid currentColor}
+.devs{padding:clamp(50px,6vw,90px) var(--pad) clamp(80px,9vw,140px);display:grid;grid-template-columns:1fr 3fr;gap:var(--pad)}
+.devs ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 22px;font-size:clamp(22px,2.6vw,42px);letter-spacing:-.035em;line-height:1.2}
+.devs li{color:#eef2fb}
+.devs li:nth-child(3n+2){color:#9fb0cf}
+
+.svc{border-top:1px solid var(--line);margin:0 var(--pad)}
+.srow{display:grid;grid-template-columns:80px 1.2fr 2fr 120px;gap:var(--pad);align-items:center;padding:clamp(22px,2.4vw,36px) 0;border-bottom:1px solid var(--line);position:relative}
+.srow .n{color:var(--ink2);font-size:13px;letter-spacing:.12em}
+.srow h3{margin:0;font-weight:400;font-size:clamp(28px,3.4vw,60px);letter-spacing:-.045em;line-height:1;transition:transform .6s var(--ease)}
+.srow p{margin:0;font-size:16px;line-height:1.55;color:var(--ink2);max-width:560px}
+.srow .th{width:120px;aspect-ratio:1;border-radius:10px;overflow:hidden;opacity:0;transform:scale(.85) rotate(-4deg);transition:opacity .5s var(--ease),transform .6s var(--ease)}
+.srow:hover .th{opacity:1;transform:none}
+.srow:hover h3{transform:translateX(12px)}
+
+.studio{display:grid;grid-template-columns:1fr 3fr;gap:var(--pad);padding:clamp(100px,13vw,220px) var(--pad)}
+.studio p.scrub{margin:0;font-size:clamp(32px,4.6vw,84px);line-height:1.02;letter-spacing:-.045em}
+.studio .sub{grid-column:2;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--pad);margin-top:clamp(36px,4vw,64px);max-width:1000px}
+.studio .sub p{margin:0;font-size:17px;line-height:1.6;color:var(--ink2)}
+
+.faq{padding:0 var(--pad);display:grid;grid-template-columns:1fr 3fr;gap:var(--pad)}
+.faq .list{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;align-items:center;padding:24px 0;font-size:clamp(19px,1.8vw,28px);letter-spacing:-.025em;line-height:1.2;min-height:44px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary i{flex:none;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);position:relative;transition:transform .5s var(--ease),background .3s}
+.faq summary i::before,.faq summary i::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:1.5px;margin:-.75px 0 0 -6px;background:currentColor}
+.faq summary i::after{transform:rotate(90deg)}
+.faq details[open] summary i{transform:rotate(45deg);background:var(--accent);border-color:var(--accent);color:#fff}
+.faq details p{margin:0 0 26px;max-width:720px;font-size:17px;line-height:1.6;color:var(--ink2)}
+
+.contact{padding:clamp(110px,13vw,220px) var(--pad) clamp(80px,9vw,140px)}
+.contact h2{margin:0;font-weight:400;font-size:clamp(56px,10.5vw,200px);line-height:.86;letter-spacing:-.065em}
+.cgrid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(30px,5vw,90px);margin-top:clamp(50px,6vw,100px)}
+form#brief{display:flex;flex-direction:column;gap:22px}
+.fl{display:flex;flex-direction:column;gap:8px}
+.fl label,.fl legend{font-size:13px;color:var(--ink2)}
+.fl input,.fl select,.fl textarea{font:inherit;font-size:16px;color:var(--ink);background:transparent;border:0;border-bottom:1px solid var(--line);padding:10px 0;min-height:44px;border-radius:0}
+.fl select option{color:#111}
+.fl textarea{min-height:96px;resize:vertical}
+.fl input:focus,.fl select:focus,.fl textarea:focus{outline:none;border-bottom-color:var(--accent)}
+fieldset.fl{border:0;padding:0;margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.chips label{position:relative;cursor:pointer}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips span{display:inline-flex;align-items:center;min-height:42px;padding:0 16px;border-radius:999px;border:1px solid var(--line);font-size:14px;color:var(--ink);transition:background .3s,color .3s,border-color .3s}
+.chips input:checked+span{background:var(--accent);border-color:var(--accent);color:#fff}
+.chips input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.bout{white-space:pre-wrap;font-size:14px;line-height:1.55;color:var(--ink2);background:var(--sand);border-radius:10px;padding:18px;margin:0;max-height:240px;overflow:auto}
+.bact{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.bnote{font-size:13px;color:var(--ink2);min-height:1.4em;margin:0}
+.cinfo{display:flex;flex-direction:column;gap:28px}
+.cinfo div{border-top:1px solid var(--line);padding-top:16px}
+.cinfo a.big{display:block;font-size:clamp(22px,2.2vw,34px);letter-spacing:-.03em;line-height:1.15;margin-top:8px;word-break:break-word}
+.cinfo a.big:hover{color:#8ea0ff}
+.cinfo ul{list-style:none;margin:8px 0 0;padding:0;display:flex;gap:18px;flex-wrap:wrap;font-size:17px}
+
+@media (max-width:860px){
+  .hx-in{grid-template-columns:minmax(0,1fr)}
+  .hx-tc{display:none}
+  .about,.studio,.faq,.devs{grid-template-columns:minmax(0,1fr)}
+  .about .cols,.studio .sub{grid-template-columns:minmax(0,1fr);grid-column:1}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:34px}
+  .offer{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .srow{grid-template-columns:44px minmax(0,1fr);gap:8px 14px}
+  .srow p{grid-column:2}.srow .th{display:none}
+  .cgrid,.two{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:560px){.offer{grid-template-columns:minmax(0,1fr)}}
+</style>
+</head>
+<body>
+<div class="loader" aria-hidden="true"><div class="n" id="cnt">0</div><div class="mk"><img src="assets/crab-logo.png" alt=""><span class="lbl">Creative studio · India to the world</span></div></div>
+<div class="progress"></div><div class="cur" aria-hidden="true"><span>View</span></div>
+<header class="nav">
+  <a class="brand" href="index.html" aria-label="Crab Studio home"><img src="assets/crab-logo.png" alt="Crab."></a>
+  <ul><li><a href="#work">Work</a></li><li><a href="work/real-estate/index.html">Real estate</a></li><li><a href="#services">Services</a></li><li><a href="#studio">Studio</a></li><li><a href="#contact">Contact</a></li></ul>
+  <div class="navr"><a class="cta" href="index.html#contact">Start a project <span aria-hidden="true">→</span></a><button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false"><i></i></button></div>
+</header>
+<div class="drawer" aria-label="Menu"><nav><a class="big" href="#work">Work</a><a class="big" href="work/real-estate/index.html">Real estate</a><a class="big" href="#services">Services</a><a class="big" href="#studio">Studio</a><a class="big" href="#contact">Contact</a><a class="big" href="index.html#contact">Contact</a></nav>
+  <div class="dfoot"><a href="mailto:media.crabstudio@gmail.com">media.crabstudio@gmail.com</a><span>+91 92136 37784 · +91 63554 13089</span><span>Ahmedabad, India · working worldwide</span></div></div>
+<main>
+<section class="hx-hero" id="top">
+  <div class="hx-media"><video id="herov" src="media/home/reel-loop.mp4" poster="media/home/reel-loop.jpg" muted loop playsinline autoplay preload="auto" aria-label="Crab Studio showreel, muted"></video></div>
+  <div class="hx-disc hx"><span>Brand films</span><span>Motion</span><span>Social</span><span>Identity</span><span>3D &amp; CGI</span></div>
+  <div class="hx-tc hx" aria-hidden="true"><i></i><span>REEL</span><span id="tc">00:00:00:00</span></div>
+  <div class="hx-in">
+    <h1 class="hx-h" aria-label="Set brands in motion."><span class="l"><span>Set brands</span></span><span class="l"><span class="it">in motion.</span></span></h1>
+    <div class="hx-side hx">
+      <p>Crab Studio is a creative studio from India. We build launch systems, campaign worlds and moving brand language for modern products and ambitious teams.</p>
+      <div class="hx-btns"><button class="cta light" type="button" data-lightbox="media/home/showreel.mp4" data-cap="Crab Studio showreel" data-poster="media/home/showreel.jpg"><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg> Play showreel</button><a class="cta ghost" style="color:#fff" href="#work">See the work</a></div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true"><div class="tt"><span>Social media</span><span>Video editing</span><span>Brand films</span><span>Motion design</span><span>3D walkthroughs</span><span>Brand identity</span><span>Content strategy</span><span>Documentary</span></div></div>
+
+<section class="about" id="about">
+  <span class="lbl muted">In brief</span>
+  <div>
+    <h2 class="split">We make brands move <span class="it">with purpose.</span></h2>
+    <div class="cols">
+      <p>Crab Studio is a collaborative design and creative team based in India. We unite strategic thinking, visual craft and sharp execution to make work that earns attention and gives brands lasting momentum.</p>
+      <p>Social media, editing, motion, identity and content strategy run as one connected practice, so clients get a team that can think broadly, move quickly and make precisely.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>73</b><span>reels cut for real estate launches</span></div>
+      <div class="stat"><b>19</b><span>developers and building brands on our reel</span></div>
+      <div class="stat"><b>21</b><span>selected brand case studies</span></div>
+      <div class="stat"><b>06</b><span>connected services, from strategy to film</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="chap"><div class="no"><span class="lbl">01</span><span class="lbl">Selected work</span></div><div><h2 class="split">Selected work, <span class="it">by brand.</span></h2><p class="desc">A short, chosen list. Real estate first, then brand films and motion, then identity and campaigns. Hover to preview, open to see the whole story.</p></div></div>
+  <nav class="wjump" aria-label="Work categories"><a href="#cat-realestate">Real Estate<span>7</span></a><a href="#cat-film">Brand Films &amp; Motion<span>4</span></a><a href="#cat-brand">Brand Identity &amp; Campaigns<span>10</span></a></nav>
+  <div class="wcat" id="cat-realestate"><span class="lbl no">01 / 03</span><div class="side"><div><h3>Real Estate</h3><p>Brand worlds, films, 3D and launch content for developers.</p></div><a class="cta ghost" href="work/real-estate/index.html">All real estate work <span aria-hidden="true">→</span></a></div></div><div class="wgrid"><a class="wcard" href="work/aurelle/index.html" data-cur="Open" data-hoverplay><div class="frame"><img src="work/aurelle/media/05_e05_hero.jpg" alt="Aurelle" loading="lazy"><video src="work/aurelle/media/sq1.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div><h3>Aurelle<small>Coastal residences, Alibaug</small></h3><p>A complete luxury property brand built end to end: identity, brochure, a one-minute film, a 3D walkthrough and a launch feed.</p><span class="k">Brand world · 3D · Film</span></a><a class="wcard" href="work/artha-developers/index.html" data-cur="Open"><div class="frame"><img src="work/artha-developers/media/g00-tower.jpg" alt="Artha Developers" loading="lazy"></div><h3>Artha Developers<small>Premium residences, GIFT City</small></h3><p>A residential launch from tower to hoarding: photoreal stills, identity, brochure, site branding and the launch feed.</p><span class="k">Brand world · Campaign · CGI</span></a><a class="wcard" href="work/aurea-penthouses/index.html" data-cur="Open" data-hoverplay><div class="frame"><img src="work/aurea-penthouses/media/a00-tower.jpg" alt="Aurea Penthouses" loading="lazy"><video src="work/aurea-penthouses/media/film.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div><h3>Aurea Penthouses<small>12 limited penthouses</small></h3><p>Twelve penthouses at the top of a tower: night-lit CGI, a brand film, identity, print and the launch campaign.</p><span class="k">Brand world · CGI · Film</span></a><a class="wcard" href="work/saffron-heights/index.html" data-cur="Open" data-hoverplay><div class="frame"><img src="work/saffron-heights/media/f07_window.jpg" alt="Tilak Group" loading="lazy"><video src="work/saffron-heights/media/film.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div><h3>Tilak Group<small>Saffron Heights, Gandhinagar</small></h3><p>A 31-second illustrated film where one saffron flower becomes a lamp, a line, and finally the tower itself.</p><span class="k">Illustrated brand film</span></a><a class="wcard" href="work/golden-group/index.html" data-cur="Open" data-hoverplay><div class="frame"><img src="work/golden-group/media/r04.jpg" alt="Golden Group" loading="lazy"><video src="work/golden-group/media/r04.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div><h3>Golden Group<small>Retail &amp; corporate, Nikol</small></h3><p>Ten launch and festival reels for a retail and corporate address at Dastan Circle, Nikol.</p><span class="k">Launch reels · Motion type</span></a><a class="wcard" href="work/sangath/index.html" data-cur="Open" data-hoverplay><div class="frame"><img src="work/sangath/media/r21.jpg" alt="Sangath" loading="lazy"><video src="work/sangath/media/r21.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div><h3>Sangath<small>Residential launch</small></h3><p>Amenity reels and walkthrough cuts: lush landscapes, pool, yoga deck and the floor plan, one feature per reel.</p><span class="k">Amenity reels · Walkthroughs</span></a><a class="wcard" href="work/aquavista/index.html" data-cur="Open" data-hoverplay><div class="frame"><img src="work/aquavista/media/r15.jpg" alt="Aquavista" loading="lazy"><video src="work/aquavista/media/r15.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div><h3>Aquavista<small>Residential launch</small></h3><p>Kinetic-type reels that sell a lifestyle feature by feature: events lawn, EV charging, skating ring and more.</p><span class="k">Amenity reels · Kinetic type</span></a></div><div class="wcat" id="cat-film"><span class="lbl no">02 / 03</span><div class="side"><div><h3>Brand Films &amp; Motion</h3><p>Launch films, festival films, explainers and out-of-home animation.</p></div></div></div><div class="wgrid"><a class="wcard" href="work/ai-sante/index.html" data-cur="Open" data-hoverplay><div class="frame"><img src="work/ai-sante/media/sante-intro.jpg" alt="AI Sante" loading="lazy"><video src="work/ai-sante/media/sante-intro.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div><h3>AI Sante<small>Healthcare AI</small></h3><p>A 4K brand intro, a kinetic-type launch film, a Diwali film and short product explainers.</p><span class="k">Brand intro · Launch film · Explainers</span></a><a class="wcard" href="work/quantumbot/index.html" data-cur="Open" data-hoverplay><div class="frame"><img src="work/quantumbot/media/qb-diwali.jpg" alt="Quantumbot" loading="lazy"><video src="work/quantumbot/media/qb-diwali.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div><h3>Quantumbot<small>AI software</small></h3><p>A Diwali film, an HRMS explainer, and the hiring reels and welcome posts behind the team.</p><span class="k">Festival film · Employer brand</span></a><a class="wcard" href="work/uttarayan-billboards/index.html" data-cur="Open" data-hoverplay><div class="frame"><img src="work/uttarayan-billboards/media/led-a.jpg" alt="Nagar · The House of MG" loading="lazy"><video src="work/uttarayan-billboards/media/led-a.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div><h3>Nagar · The House of MG<small>Uttarayan festival</small></h3><p>Animated kite-festival billboards made for city LED screens and an airport wall six thousand pixels wide.</p><span class="k">LED billboard animation</span></a><a class="wcard" href="work/ai-film-lab/index.html" data-cur="Open" data-hoverplay><div class="frame"><img src="work/ai-film-lab/media/vita-radiance.jpg" alt="AI Film Lab" loading="lazy"><video src="work/ai-film-lab/media/vita-radiance.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div><h3>AI Film Lab<small>Beauty, tech and automotive</small></h3><p>Seven short product films made storyboard-first: serums, foundation, gloss, a tech reveal and a studio car.</p><span class="k">AI-assisted product films</span></a></div><div class="wcat" id="cat-brand"><span class="lbl no">03 / 03</span><div class="side"><div><h3>Brand Identity &amp; Campaigns</h3><p>Identities, packaging and campaign imagery for consumer brands.</p></div></div></div><div class="wgrid"><a class="wcard l" href="work/midori-matcha/index.html" data-cur="Open" data-hoverplay><div class="frame"><img src="work/midori-matcha/media/m07.jpg" alt="Midori Matcha" loading="lazy"><video src="work/midori-matcha/media/film.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div><h3>Midori Matcha<small>Ceremonial-grade matcha</small></h3><p>A dark, quiet matcha world where the only bright green is the powder itself.</p><span class="k">Brand world · Packaging · Film</span></a><a class="wcard l" href="work/soleva-lip-oil/index.html" data-cur="Open" data-hoverplay><div class="frame"><img src="work/soleva-lip-oil/media/hero.jpg" alt="Soléva Velvet Lip Oil" loading="lazy"><video src="work/soleva-lip-oil/media/film.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div><h3>Soléva Velvet Lip Oil<small>Berry-glaze lip oil</small></h3><p>Two product films and twenty frames in wine-dark velvet, blackberries and gold.</p><span class="k">Product films · Still library</span></a><a class="wcard" href="work/pura-vita/index.html" data-cur="Open" data-hoverplay><div class="frame"><img src="work/pura-vita/media/hero.jpg" alt="Pura Vita" loading="lazy"><video src="work/pura-vita/media/film.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div><h3>Pura Vita<small>Hydrating gel cream</small></h3><p>A green-glass gel cream taken back into the forest: moss, water and white blossom.</p><span class="k">Product film · Stills</span></a><a class="wcard" href="work/devi-glow/index.html" data-cur="Open"><div class="frame"><img src="work/devi-glow/media/radiance-serum-portrait.jpg" alt="Devi Glow" loading="lazy"></div><h3>Devi Glow<small>Radiance skincare launch</small></h3><p>Ritual ingredients meet high-impact colour and clean product storytelling.</p><span class="k">Packaging · Campaign</span></a><a class="wcard" href="work/soleva/index.html" data-cur="Open"><div class="frame"><img src="work/soleva/media/renewal-water-landscape.jpg" alt="Soleva" loading="lazy"></div><h3>Soleva<small>Clean serum campaign</small></h3><p>Minimal product language made tactile through water, shadow and close-ups.</p><span class="k">Image system · Campaign</span></a><a class="wcard" href="work/pop-club/index.html" data-cur="Open"><div class="frame"><img src="work/pop-club/media/pop-club-box-portrait.jpg" alt="Pop Club" loading="lazy"></div><h3>Pop Club<small>Bold skincare packaging</small></h3><p>Hot pink, yellow and black type: skincare packaging made deliberately loud.</p><span class="k">Packaging system</span></a><a class="wcard" href="work/aarambh/index.html" data-cur="Open"><div class="frame"><img src="work/aarambh/media/frozen-dessert-grid.jpg" alt="Aarambh" loading="lazy"></div><h3>Aarambh<small>Indian food and desserts</small></h3><p>An abundant, sunlit food world that makes the menu memorable at a glance.</p><span class="k">Food campaign · Packaging</span></a><a class="wcard" href="work/nexus/index.html" data-cur="Open"><div class="frame"><img src="work/nexus/media/notebooks-hero.jpg" alt="Nexus" loading="lazy"></div><h3>Nexus<small>Consulting</small></h3><p>Quiet stationery, deep green surfaces and exact typography for an executive brand.</p><span class="k">Corporate identity</span></a><a class="wcard" href="work/lumora/index.html" data-cur="Open" data-hoverplay><div class="frame"><img src="work/lumora/media/lu-hero.jpg" alt="Lumora" loading="lazy"><video src="work/lumora/media/film-a.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div><h3>Lumora<small>Strawberry citrus soda</small></h3><p>Fruit, fizz and pink: two product films and a scroll-stopping summer campaign.</p><span class="k">Product films · Campaign</span></a><a class="wcard" href="work/product-stills/index.html" data-cur="Open"><div class="frame"><img src="work/product-stills/media/noiren-a.jpg" alt="Product &amp; Campaign Stills" loading="lazy"></div><h3>Product &amp; Campaign Stills<small>Fashion, home, food</small></h3><p>Editorial fashion, quiet furniture, appliance hero shots and food built layer by layer.</p><span class="k">Photography</span></a></div>
+</section>
+
+<section class="re" id="realestate">
+  <div class="chap"><div class="no"><span class="lbl">02</span><span class="lbl">For developers</span></div><div><h2 class="split">Your project, <span class="it">before it is built.</span></h2><p class="desc">Real estate is our deepest practice. From a 3D walkthrough of a villa that does not exist yet to a year of launch reels, we give sales teams material that looks as good as the homes they are selling.</p></div></div>
+  <div class="mq"><div class="mtrack"><div class="ph" data-lightbox="work/real-estate/media/r01.mp4" data-group="mq" data-cap="Golden Group" data-poster="work/real-estate/media/r01.jpg" data-cur="Play"><img src="work/real-estate/media/r01.jpg" alt="Golden Group reel" loading="lazy"><span>Golden Group</span></div><div class="ph" data-lightbox="work/real-estate/media/r04.mp4" data-group="mq" data-cap="Golden Group" data-poster="work/real-estate/media/r04.jpg" data-cur="Play"><img src="work/real-estate/media/r04.jpg" alt="Golden Group reel" loading="lazy"><span>Golden Group</span></div><div class="ph" data-lightbox="work/real-estate/media/r08.mp4" data-group="mq" data-cap="Golden Group" data-poster="work/real-estate/media/r08.jpg" data-cur="Play"><img src="work/real-estate/media/r08.jpg" alt="Golden Group reel" loading="lazy"><span>Golden Group</span></div><div class="ph" data-lightbox="work/real-estate/media/r12.mp4" data-group="mq" data-cap="Aquavista" data-poster="work/real-estate/media/r12.jpg" data-cur="Play"><img src="work/real-estate/media/r12.jpg" alt="Aquavista reel" loading="lazy"><span>Aquavista</span></div><div class="ph" data-lightbox="work/real-estate/media/r14.mp4" data-group="mq" data-cap="Aquavista" data-poster="work/real-estate/media/r14.jpg" data-cur="Play"><img src="work/real-estate/media/r14.jpg" alt="Aquavista reel" loading="lazy"><span>Aquavista</span></div><div class="ph" data-lightbox="work/real-estate/media/r17.mp4" data-group="mq" data-cap="Sangath" data-poster="work/real-estate/media/r17.jpg" data-cur="Play"><img src="work/real-estate/media/r17.jpg" alt="Sangath reel" loading="lazy"><span>Sangath</span></div><div class="ph" data-lightbox="work/real-estate/media/r19.mp4" data-group="mq" data-cap="Sangath" data-poster="work/real-estate/media/r19.jpg" data-cur="Play"><img src="work/real-estate/media/r19.jpg" alt="Sangath reel" loading="lazy"><span>Sangath</span></div><div class="ph" data-lightbox="work/real-estate/media/r21.mp4" data-group="mq" data-cap="Sangath" data-poster="work/real-estate/media/r21.jpg" data-cur="Play"><img src="work/real-estate/media/r21.jpg" alt="Sangath reel" loading="lazy"><span>Sangath</span></div><div class="ph" data-lightbox="work/real-estate/media/r22.mp4" data-group="mq" data-cap="Sangath" data-poster="work/real-estate/media/r22.jpg" data-cur="Play"><img src="work/real-estate/media/r22.jpg" alt="Sangath reel" loading="lazy"><span>Sangath</span></div><div class="ph" data-lightbox="work/real-estate/media/r25.mp4" data-group="mq" data-cap="Satatya" data-poster="work/real-estate/media/r25.jpg" data-cur="Play"><img src="work/real-estate/media/r25.jpg" alt="Satatya reel" loading="lazy"><span>Satatya</span></div><div class="ph" data-lightbox="work/real-estate/media/r27.mp4" data-group="mq" data-cap="Sarovar Group" data-poster="work/real-estate/media/r27.jpg" data-cur="Play"><img src="work/real-estate/media/r27.jpg" alt="Sarovar Group reel" loading="lazy"><span>Sarovar Group</span></div><div class="ph" data-lightbox="work/real-estate/media/r31.mp4" data-group="mq" data-cap="Bluebell" data-poster="work/real-estate/media/r31.jpg" data-cur="Play"><img src="work/real-estate/media/r31.jpg" alt="Bluebell reel" loading="lazy"><span>Bluebell</span></div><div class="ph" data-lightbox="work/real-estate/media/r32.mp4" data-group="mq" data-cap="Bluebell" data-poster="work/real-estate/media/r32.jpg" data-cur="Play"><img src="work/real-estate/media/r32.jpg" alt="Bluebell reel" loading="lazy"><span>Bluebell</span></div><div class="ph" data-lightbox="work/real-estate/media/r37.mp4" data-group="mq" data-cap="Aurika One" data-poster="work/real-estate/media/r37.jpg" data-cur="Play"><img src="work/real-estate/media/r37.jpg" alt="Aurika One reel" loading="lazy"><span>Aurika One</span></div><div class="ph" data-lightbox="work/real-estate/media/r39.mp4" data-group="mq" data-cap="Avedaa" data-poster="work/real-estate/media/r39.jpg" data-cur="Play"><img src="work/real-estate/media/r39.jpg" alt="Avedaa reel" loading="lazy"><span>Avedaa</span></div><div class="ph" data-lightbox="work/real-estate/media/r41.mp4" data-group="mq" data-cap="Brim" data-poster="work/real-estate/media/r41.jpg" data-cur="Play"><img src="work/real-estate/media/r41.jpg" alt="Brim reel" loading="lazy"><span>Brim</span></div><div class="ph" data-lightbox="work/real-estate/media/r49.mp4" data-group="mq" data-cap="Parklane Twins" data-poster="work/real-estate/media/r49.jpg" data-cur="Play"><img src="work/real-estate/media/r49.jpg" alt="Parklane Twins reel" loading="lazy"><span>Parklane Twins</span></div><div class="ph" data-lightbox="work/real-estate/media/r53.mp4" data-group="mq" data-cap="Anushri Lakeend" data-poster="work/real-estate/media/r53.jpg" data-cur="Play"><img src="work/real-estate/media/r53.jpg" alt="Anushri Lakeend reel" loading="lazy"><span>Anushri Lakeend</span></div></div></div>
+  <div class="offer">
+    <div><span class="lbl">3D &amp; CGI</span><h3>Walkthroughs and stills</h3><p>A model, a walkthrough and realistic stills made from plans and references, ready before construction.</p><a href="work/aurelle/index.html">See Aurelle</a></div>
+    <div><span class="lbl">Film</span><h3>Brand films</h3><p>Short films that give a project a story: illustrated, cinematic or shot on site.</p><a href="work/saffron-heights/index.html">See Saffron Heights</a></div>
+    <div><span class="lbl">Social</span><h3>Launch reels</h3><p>73 reels and counting: teasers, amenity cuts, walkthrough edits and festival posts.</p><a href="work/real-estate/index.html">See all real estate work</a></div>
+    <div><span class="lbl">Campaign</span><h3>Launch systems</h3><p>Key visuals, hoardings, brochures and lead-gen creatives in one consistent voice.</p><a href="work/artha-developers/index.html">See Artha</a></div>
+  </div>
+  <div class="devs"><span class="lbl" style="color:#9fb0cf">Brands on our reel</span><ul><li>Tilak Group</li><li>Artha Developers</li><li>Good Times</li><li>Golden Group</li><li>Aquavista</li><li>Sangath</li><li>Satatya</li><li>Sarovar Group</li><li>Bluebell</li><li>Arbuda Trade Center</li><li>Aurika One</li><li>Avedaa</li><li>Brim</li><li>Kushalbag Marbles</li><li>Meshwo Nest</li><li>Parklane Twins</li><li>Prycoons</li><li>Anushri Lakeend</li></ul></div>
+</section>
+
+<section id="services">
+  <div class="chap"><div class="no"><span class="lbl">03</span><span class="lbl">Services</span></div><div><h2 class="split">One team, from brand thinking <span class="it">to daily content.</span></h2><p class="desc">We can lead a complete creative partnership, or focus on the discipline that gives an existing team more range, consistency and momentum.</p></div></div>
+  <div class="svc"><div class="srow"><span class="n">01</span><h3>Social Media Management</h3><p>Content systems that keep brands active, consistent and impossible to ignore. Strategy and execution work together.</p><div class="th"><img src="work/real-estate/media/r21.jpg" alt="" loading="lazy"></div></div><div class="srow"><span class="n">02</span><h3>Brand Identity</h3><p>Recognisable identities through logos, type, colour and flexible brand systems, every detail tied to clear positioning.</p><div class="th"><img src="work/soleva/media/renewal-box-square.jpg" alt="" loading="lazy"></div></div><div class="srow"><span class="n">03</span><h3>Documentary</h3><p>Real stories through emotionally driven films: founder journeys, communities and brand stories told with cinematic intent.</p><div class="th"><img src="media/home/svc-documentary.jpg" alt="" loading="lazy"></div></div><div class="srow"><span class="n">04</span><h3>Cinematic</h3><p>Visually striking content that turns a brand message into an experience: considered frames, sound, story and emotion.</p><div class="th"><img src="media/home/svc-cinematic.jpg" alt="" loading="lazy"></div></div><div class="srow"><span class="n">05</span><h3>Motion Design</h3><p>Motion graphics and animation that bring products and ideas to life, from logo reveals and kinetic type to full systems.</p><div class="th"><img src="media/home/svc-motion.jpg" alt="" loading="lazy"></div></div><div class="srow"><span class="n">06</span><h3>Brand Consultancy</h3><p>Clarity on positioning, communication and long-term creative direction, turned into a practical plan for execution.</p><div class="th"><img src="work/nexus/media/strategy-desk.jpg" alt="" loading="lazy"></div></div></div>
+</section>
+
+<section id="process">
+  <div class="chap"><div class="no"><span class="lbl">04</span><span class="lbl">Workflow</span></div><div><h2 class="split">Creative vision, <span class="it">real-world execution.</span></h2><p class="desc">The work stays joined up from strategy to delivery. Clients stay close to the process, and every decision ties back to the audience.</p></div></div>
+  <div class="proc"><div class="step"><span class="n lbl">01</span><h3>Position &amp; plan</h3><p>We clarify the audience, business goal, platform and message before choosing a format or opening a timeline.</p></div><div class="step"><span class="n lbl">02</span><h3>Build the system</h3><p>Strategy becomes a visual and verbal content system: concepts, references, formats, schedules and a recognisable direction.</p></div><div class="step"><span class="n lbl">03</span><h3>Produce together</h3><p>Direction, design, editing, motion and specialist collaborators in one close production loop.</p></div><div class="step"><span class="n lbl">04</span><h3>Publish &amp; learn</h3><p>Organised assets for every screen, then real audience response sharpens what comes next.</p></div></div>
+</section>
+
+<section class="studio" id="studio">
+  <span class="lbl muted">The studio model</span>
+  <p class="scrub">Small enough to stay close. Built to reach globally. One connected team from the first thought to the final file.</p>
+  <div class="sub">
+    <p>Crab Studio is a group, not a single creative signature. Every discipline stays in conversation, so the work feels coherent at every touchpoint.</p>
+    <p>The structure expands around the brief, bringing filmmakers, photographers, writers, designers and specialist artists into one accountable team.</p>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="chap"><div class="no"><span class="lbl">05</span><span class="lbl">Questions</span></div><div><h2 class="split">Frequently <span class="it">asked.</span></h2></div></div>
+  <div class="faq"><span></span><div class="list"><details><summary>Do you work with brands that already exist, or only from scratch?<i aria-hidden="true"></i></summary><p>Both. We can build a new identity from the ground up or work inside an established system, extending it through motion, film, social content and campaign design.</p></details><details><summary>What makes Crab Studio different from a typical agency?<i aria-hidden="true"></i></summary><p>Strategy and hands-on execution stay in one room. Social, editing, motion, identity and content direction run as one workflow instead of being passed between disconnected teams.</p></details><details><summary>Can you make 3D walkthroughs and films for a project that is not built yet?<i aria-hidden="true"></i></summary><p>Yes. Aurelle shows the full pipeline: a 3D model, a walkthrough, realistic stills, a brand film and the launch feed, all made before a single brick is laid.</p></details><details><summary>Do you handle copywriting and content, or just design?<i aria-hidden="true"></i></summary><p>We shape content strategy, campaign ideas, scripts, messaging and the visual execution. The exact mix is agreed at the start so responsibilities stay clear.</p></details><details><summary>What do you need from us before starting?<i aria-hidden="true"></i></summary><p>Your goals, audience, offer, current brand assets, channels, references, timeline and decision-makers. We help turn an incomplete brief into a focused plan.</p></details><details><summary>What if we need changes after delivery?<i aria-hidden="true"></i></summary><p>We plan review rounds during production and can scope ongoing support after launch. For content partnerships, the system is designed to evolve with your calendar.</p></details></div></div>
+</section>
+
+<section class="contact" id="contact">
+  <span class="lbl muted">06 · Start a project</span>
+  <h2 class="split" style="margin-top:20px">Let’s make <span class="it">something matter.</span></h2>
+  <div class="cgrid">
+    <form id="brief" novalidate>
+      <fieldset class="fl"><legend>What do you need?</legend><div class="chips"><label><input type="checkbox" name="svc" value="Social media"><span>Social media</span></label><label><input type="checkbox" name="svc" value="Brand identity"><span>Brand identity</span></label><label><input type="checkbox" name="svc" value="Brand film"><span>Brand film</span></label><label><input type="checkbox" name="svc" value="Motion design"><span>Motion design</span></label><label><input type="checkbox" name="svc" value="3D walkthrough"><span>3D walkthrough</span></label><label><input type="checkbox" name="svc" value="Real estate launch"><span>Real estate launch</span></label><label><input type="checkbox" name="svc" value="Documentary"><span>Documentary</span></label><label><input type="checkbox" name="svc" value="Consultancy"><span>Consultancy</span></label></div></fieldset>
+      <div class="two">
+        <div class="fl"><label for="bname">Your name</label><input id="bname" autocomplete="name"></div>
+        <div class="fl"><label for="bco">Brand or company</label><input id="bco" autocomplete="organization"></div>
+      </div>
+      <div class="fl"><label for="bwhen">Timeline</label><select id="bwhen"><option value="">Choose one</option><option>As soon as possible</option><option>Within a month</option><option>In one to three months</option><option>Just exploring</option></select></div>
+      <div class="fl"><label for="bmsg">Tell us about the project</label><textarea id="bmsg" placeholder="What are you building, where does it need to go, and what does success look like?"></textarea></div>
+      <div class="fl"><span class="lbl muted" style="font-size:12px">Your message</span><pre class="bout" id="briefout"></pre></div>
+      <div class="bact"><a class="cta" id="briefmail" href="mailto:media.crabstudio@gmail.com">Send by email <span aria-hidden="true">→</span></a><button class="cta ghost" type="button" id="briefcopy">Copy message</button></div>
+      <p class="bnote" id="briefnote" aria-live="polite">Opens your email app with the message ready to send to media.crabstudio@gmail.com.</p>
+    </form>
+    <div class="cinfo">
+      <div><span class="lbl muted">Email</span><a class="big" href="mailto:media.crabstudio@gmail.com">media.crabstudio@gmail.com</a></div>
+      <div><span class="lbl muted">Phone and WhatsApp</span><a class="big" href="tel:+919213637784">+91 92136 37784</a><a class="big" href="tel:+916355413089">+91 63554 13089</a></div>
+      <div><span class="lbl muted">Studio</span><p style="margin:8px 0 0;font-size:17px">Based in Ahmedabad, India. Collaborating worldwide.</p></div>
+      <div><span class="lbl muted">Follow</span><ul><li><a href="https://www.instagram.com/crabstudio">Instagram</a></li><li><a href="https://www.behance.net/crabstudio">Behance</a></li><li><a href="https://www.linkedin.com/company/crabstudio">LinkedIn</a></li></ul></div>
+    </div>
+  </div>
+</section>
+</main>
+<footer id="footer">
+  <div class="fgrid">
+    <div><p class="fbig">Set brands<br><span class="it">in motion.</span></p></div>
+    <div><h4 class="lbl">Studio</h4><ul><li>Crab Studio</li><li>Ahmedabad, India</li><li>Working worldwide</li></ul></div>
+    <div><h4 class="lbl">Contact</h4><ul><li><a href="mailto:media.crabstudio@gmail.com">media.crabstudio@gmail.com</a></li><li><a href="tel:+919213637784">+91 92136 37784</a></li><li><a href="tel:+916355413089">+91 63554 13089</a></li></ul></div>
+    <div><h4 class="lbl">Follow</h4><ul><li><a href="https://www.instagram.com/crabstudio">Instagram</a></li><li><a href="https://www.behance.net/crabstudio">Behance</a></li><li><a href="https://www.linkedin.com/company/crabstudio">LinkedIn</a></li></ul></div>
+  </div>
+  <img class="flogo" src="assets/crab-logo.png" alt="" loading="lazy">
+  <div class="fbot"><span>© 2026 Crab Studio</span><span>Strategy, social, film, motion and identity from one studio.</span><a href="#top">Back to top ↑</a></div>
+</footer>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script><script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script><script defer src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="assets/crab.js" defer></script>
+</body>
+</html>
